@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Route Map - EU Trip 2026</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #1e293b;
+            color: white;
+            min-height: 100vh;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: rgba(30, 41, 59, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .nav-brand {
+            font-weight: 700;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-brand a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-emoji {
+            font-size: 1.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #94a3b8;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        /* Main Container */
+        .main-container {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            height: calc(100vh - 60px);
+        }
+
+        /* Map */
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: #0f172a;
+            padding: 2rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-subtitle {
+            color: #94a3b8;
+            margin-bottom: 2rem;
+        }
+
+        /* Slider */
+        .slider-container {
+            background: #1e293b;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .slider-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .day-display {
+            font-size: 2rem;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+            color: #f59e0b;
+        }
+
+        .slider-wrapper {
+            position: relative;
+            padding: 10px 0;
+        }
+
+        #daySlider {
+            width: 100%;
+            height: 8px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: #334155;
+            border-radius: 4px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        #daySlider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            background: #f59e0b;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            transition: transform 0.2s;
+        }
+
+        #daySlider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        #daySlider::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            background: #f59e0b;
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        }
+
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+            font-size: 0.75rem;
+            color: #64748b;
+        }
+
+        /* Play Button */
+        .controls {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .btn-play {
+            background: #22c55e;
+            color: white;
+        }
+
+        .btn-play:hover {
+            background: #16a34a;
+        }
+
+        .btn-play.playing {
+            background: #ef4444;
+        }
+
+        .btn-reset {
+            background: #334155;
+            color: white;
+        }
+
+        .btn-reset:hover {
+            background: #475569;
+        }
+
+        /* Day Info Card */
+        .day-info {
+            background: #1e293b;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .day-info-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #334155;
+        }
+
+        .location-icon {
+            font-size: 2.5rem;
+        }
+
+        .location-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .location-country {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        .day-type {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        .type-city { background: #3b82f6; }
+        .type-nature { background: #22c55e; }
+        .type-party { background: #ec4899; }
+        .type-drive { background: #f59e0b; }
+        .type-culture { background: #8b5cf6; }
+
+        .day-description {
+            margin-top: 1rem;
+            line-height: 1.6;
+            color: #cbd5e1;
+        }
+
+        .day-highlights {
+            margin-top: 1rem;
+        }
+
+        .day-highlights h4 {
+            font-size: 0.875rem;
+            color: #94a3b8;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .highlight-list {
+            list-style: none;
+        }
+
+        .highlight-list li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #e2e8f0;
+        }
+
+        .highlight-list li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #f59e0b;
+        }
+
+        /* Stats */
+        .trip-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #334155;
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 1rem;
+            background: #0f172a;
+            border-radius: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #f59e0b;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-top: 0.25rem;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            margin-top: 1.5rem;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: #334155;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #f59e0b, #ec4899);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        /* Custom Leaflet Markers */
+        .car-marker {
+            font-size: 2rem;
+            filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.5));
+        }
+
+        .city-marker {
+            background: white;
+            border-radius: 50%;
+            width: 12px;
+            height: 12px;
+            border: 3px solid #3b82f6;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .city-marker.visited {
+            background: #22c55e;
+            border-color: #22c55e;
+        }
+
+        .city-marker.current {
+            background: #f59e0b;
+            border-color: #f59e0b;
+            width: 16px;
+            height: 16px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.3); opacity: 0.8; }
+        }
+
+        .city-label {
+            background: rgba(15, 23, 42, 0.9);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                grid-template-rows: 50vh 1fr;
+            }
+
+            .sidebar {
+                padding: 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        /* Leaflet overrides */
+        .leaflet-popup-content-wrapper {
+            background: #1e293b;
+            color: white;
+            border-radius: 0.5rem;
+        }
+
+        .leaflet-popup-tip {
+            background: #1e293b;
+        }
+
+        .leaflet-popup-content {
+            margin: 12px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <span class="nav-emoji">🚗</span>
+            <a href="index.html">EU Trip 2026</a>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="docs/itinerary.html">Itinerary</a>
+            <a href="docs/budget.html">Budget</a>
+            <a href="docs/nightlife.html">Nightlife</a>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div id="map"></div>
+
+        <div class="sidebar">
+            <h1>🗺️ Interactive Route</h1>
+            <p class="sidebar-subtitle">Watch the journey unfold day by day</p>
+
+            <div class="slider-container">
+                <div class="slider-header">
+                    <span>Progress</span>
+                    <span class="day-display">Day <span id="currentDay">1</span></span>
+                </div>
+                <div class="slider-wrapper">
+                    <input type="range" id="daySlider" min="1" max="14" value="1">
+                </div>
+                <div class="slider-labels">
+                    <span>Day 1</span>
+                    <span>Day 14</span>
+                </div>
+                <div class="controls">
+                    <button class="btn btn-play" id="playBtn">▶ Play Trip</button>
+                    <button class="btn btn-reset" id="resetBtn">↺ Reset</button>
+                </div>
+            </div>
+
+            <div class="day-info" id="dayInfo">
+                <!-- Dynamic content -->
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-label">
+                    <span>Trip Progress</span>
+                    <span id="progressPercent">0%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <div class="trip-stats">
+                <div class="stat-box">
+                    <div class="stat-value" id="kmTraveled">0</div>
+                    <div class="stat-label">KM Traveled</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="countriesVisited">1</div>
+                    <div class="stat-label">Countries</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Trip data with coordinates
+        const tripDays = [
+            {
+                day: 1,
+                location: "Prague",
+                country: "Czech Republic",
+                coords: [50.0755, 14.4378],
+                icon: "🏙️",
+                type: "city",
+                typeLabel: "City",
+                description: "Arrive in Prague! Pick up rental cars at the airport and head to your accommodation in the Old Town. Explore the magical Old Town Square and the famous Astronomical Clock.",
+                highlights: ["Pick up rental cars", "Check into accommodation", "Old Town Square evening walk", "Welcome dinner & drinks"],
+                kmFromStart: 0,
+                countries: ["Czech Republic"]
+            },
+            {
+                day: 2,
+                location: "Prague",
+                country: "Czech Republic",
+                coords: [50.0905, 14.4003],
+                icon: "🏰",
+                type: "party",
+                typeLabel: "History + Party",
+                description: "Full day exploring Prague's incredible history, followed by an epic night out! Prague Castle is the world's largest ancient castle complex.",
+                highlights: ["Prague Castle & St. Vitus Cathedral", "Charles Bridge walk", "Petřín Hill views", "PARTY: Karlovy Lázně - 5 floor club!"],
+                kmFromStart: 0,
+                countries: ["Czech Republic"]
+            },
+            {
+                day: 3,
+                location: "Bohemian Switzerland",
+                country: "Czech Republic",
+                coords: [50.8833, 14.2833],
+                icon: "🏔️",
+                type: "nature",
+                typeLabel: "Nature",
+                description: "Road trip to Bohemian Switzerland National Park! Hike to Europe's largest natural sandstone arch and take a peaceful boat ride through the gorge.",
+                highlights: ["Pravčická Brána - iconic arch", "Kamenice Gorge boat ride", "Forest hiking trails", "Return to Prague"],
+                kmFromStart: 120,
+                countries: ["Czech Republic"]
+            },
+            {
+                day: 4,
+                location: "Český Krumlov",
+                country: "Czech Republic",
+                coords: [48.8127, 14.3175],
+                icon: "🏰",
+                type: "culture",
+                typeLabel: "Fairytale",
+                description: "Drive to the magical medieval town of Český Krumlov. Stay overnight to experience the town after day-trippers leave - it's absolutely magical!",
+                highlights: ["Scenic drive through Bohemia", "Český Krumlov Castle", "Rafting on Vltava River", "Fairytale evening stroll"],
+                kmFromStart: 290,
+                countries: ["Czech Republic"]
+            },
+            {
+                day: 5,
+                location: "Salzburg",
+                country: "Austria",
+                coords: [47.8095, 13.0550],
+                icon: "⛰️",
+                type: "nature",
+                typeLabel: "Alpine",
+                description: "Cross into Austria! Optional stop at Hallstatt (but beware of crowds), then continue to the beautiful city of Salzburg, birthplace of Mozart.",
+                highlights: ["Drive through Austrian Alps", "Hallstatt/St. Wolfgang stop", "Arrive in Salzburg", "Explore Altstadt"],
+                kmFromStart: 490,
+                countries: ["Czech Republic", "Austria"]
+            },
+            {
+                day: 6,
+                location: "Vienna",
+                country: "Austria",
+                coords: [48.2082, 16.3738],
+                icon: "🎭",
+                type: "culture",
+                typeLabel: "Culture",
+                description: "Morning in Salzburg, then drive to the imperial city of Vienna. Explore the elegant Ringstrasse and settle into the MuseumsQuartier area.",
+                highlights: ["Mirabell Gardens", "Mozart's birthplace", "Scenic drive to Vienna", "Evening Ringstrasse walk"],
+                kmFromStart: 710,
+                countries: ["Czech Republic", "Austria"]
+            },
+            {
+                day: 7,
+                location: "Vienna",
+                country: "Austria",
+                coords: [48.1845, 16.3122],
+                icon: "👑",
+                type: "party",
+                typeLabel: "Culture + Party",
+                description: "Full day in Vienna! Visit the stunning Schönbrunn Palace, see Klimt's 'The Kiss' at Belvedere, and experience Vienna's underrated nightlife.",
+                highlights: ["Schönbrunn Palace", "Belvedere Palace - The Kiss", "Café Sacher - Sachertorte", "Night: Pratersauna club"],
+                kmFromStart: 710,
+                countries: ["Czech Republic", "Austria"]
+            },
+            {
+                day: 8,
+                location: "Budapest",
+                country: "Hungary",
+                coords: [47.4979, 19.0402],
+                icon: "🌉",
+                type: "drive",
+                typeLabel: "Road Trip",
+                description: "Epic day covering two capitals! Quick stop in Bratislava, then continue to Budapest. Check into the Jewish Quarter - ruin bar central!",
+                highlights: ["Bratislava Castle stop", "Cross into Hungary", "Arrive Budapest District VII", "First ruin bar scout"],
+                kmFromStart: 960,
+                countries: ["Czech Republic", "Austria", "Slovakia", "Hungary"]
+            },
+            {
+                day: 9,
+                location: "Budapest",
+                country: "Hungary",
+                coords: [47.5188, 19.0810],
+                icon: "♨️",
+                type: "nature",
+                typeLabel: "Relaxation",
+                description: "Experience Budapest's famous thermal bath culture! Soak in the iconic Széchenyi Baths, then explore the city's incredible architecture.",
+                highlights: ["Széchenyi Thermal Baths", "Heroes' Square", "Hungarian Parliament", "Fisherman's Bastion sunset"],
+                kmFromStart: 960,
+                countries: ["Czech Republic", "Austria", "Slovakia", "Hungary"]
+            },
+            {
+                day: 10,
+                location: "Budapest",
+                country: "Hungary",
+                coords: [47.4954, 19.0624],
+                icon: "🎉",
+                type: "party",
+                typeLabel: "PARTY!",
+                description: "THE BIG NIGHT! Budapest's legendary ruin bars await. Start at Szimpla Kert, hop through multiple bars, and party until sunrise at Instant-Fogas!",
+                highlights: ["Sleep in & brunch", "Jewish Quarter street art", "Szimpla Kert - THE ruin bar", "Instant-Fogas until 6 AM!"],
+                kmFromStart: 960,
+                countries: ["Czech Republic", "Austria", "Slovakia", "Hungary"]
+            },
+            {
+                day: 11,
+                location: "Brno",
+                country: "Czech Republic",
+                coords: [49.1951, 16.6068],
+                icon: "🚗",
+                type: "drive",
+                typeLabel: "Recovery",
+                description: "Recovery day! Begin the journey back towards Prague, stopping in the university city of Brno. Take it easy after last night's epic party.",
+                highlights: ["Late checkout", "Scenic drive north", "Brno old town walk", "Early night!"],
+                kmFromStart: 1190,
+                countries: ["Czech Republic", "Austria", "Slovakia", "Hungary"]
+            },
+            {
+                day: 12,
+                location: "Dresden",
+                country: "Germany",
+                coords: [51.0504, 13.7373],
+                icon: "🏛️",
+                type: "culture",
+                typeLabel: "Optional",
+                description: "Flexible day! Option to visit Dresden - a stunning Baroque city rebuilt after WWII. Alternatively, visit Kutná Hora's Bone Church or rest in Prague.",
+                highlights: ["Dresden's Zwinger Palace", "Frauenkirche cathedral", "Old Masters Gallery", "Return to Prague"],
+                kmFromStart: 1340,
+                countries: ["Czech Republic", "Austria", "Slovakia", "Hungary", "Germany"]
+            },
+            {
+                day: 13,
+                location: "Prague",
+                country: "Czech Republic",
+                coords: [50.0880, 14.4208],
+                icon: "🍺",
+                type: "city",
+                typeLabel: "Final Day",
+                description: "Last full day in Prague! Explore neighborhoods you missed, pick up souvenirs, and have a memorable farewell dinner with the group.",
+                highlights: ["Vyšehrad fortress", "Vinohrady neighborhood", "Souvenir shopping", "Farewell dinner & drinks"],
+                kmFromStart: 1400,
+                countries: ["Czech Republic", "Austria", "Slovakia", "Hungary", "Germany"]
+            },
+            {
+                day: 14,
+                location: "Prague Airport",
+                country: "Czech Republic",
+                coords: [50.1008, 14.2632],
+                icon: "✈️",
+                type: "drive",
+                typeLabel: "Departure",
+                description: "Time to head home! Return the rental cars at the airport and catch your flight back to India. What an incredible adventure!",
+                highlights: ["Pack up", "Return rental cars", "Airport check-in", "Fly home with memories!"],
+                kmFromStart: 1400,
+                countries: ["Czech Republic", "Austria", "Slovakia", "Hungary", "Germany"]
+            }
+        ];
+
+        // Route coordinates for the polyline
+        const routeCoords = [
+            [50.0755, 14.4378],  // Prague
+            [50.8833, 14.2833],  // Bohemian Switzerland
+            [50.0755, 14.4378],  // Back to Prague
+            [48.8127, 14.3175],  // Český Krumlov
+            [47.5667, 13.6500],  // Hallstatt area
+            [47.8095, 13.0550],  // Salzburg
+            [48.2082, 16.3738],  // Vienna
+            [48.1486, 17.1077],  // Bratislava
+            [47.4979, 19.0402],  // Budapest
+            [49.1951, 16.6068],  // Brno
+            [51.0504, 13.7373],  // Dresden
+            [50.0755, 14.4378],  // Prague
+            [50.1008, 14.2632],  // Prague Airport
+        ];
+
+        // Initialize map
+        const map = L.map('map', {
+            zoomControl: true,
+            scrollWheelZoom: true
+        }).setView([49.5, 14.5], 6);
+
+        // Add dark tile layer
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+            subdomains: 'abcd',
+            maxZoom: 20
+        }).addTo(map);
+
+        // Draw the full route (faded)
+        const fullRoute = L.polyline(routeCoords, {
+            color: '#475569',
+            weight: 3,
+            opacity: 0.5,
+            dashArray: '10, 10'
+        }).addTo(map);
+
+        // Draw traveled route (will be updated)
+        const traveledRoute = L.polyline([], {
+            color: '#f59e0b',
+            weight: 4,
+            opacity: 1
+        }).addTo(map);
+
+        // City markers
+        const cityMarkers = {};
+        const uniqueLocations = [];
+        const seenLocations = new Set();
+
+        tripDays.forEach(day => {
+            const key = day.location;
+            if (!seenLocations.has(key)) {
+                seenLocations.add(key);
+                uniqueLocations.push(day);
+            }
+        });
+
+        uniqueLocations.forEach(day => {
+            const marker = L.circleMarker(day.coords, {
+                radius: 6,
+                fillColor: '#3b82f6',
+                color: '#fff',
+                weight: 2,
+                opacity: 1,
+                fillOpacity: 1
+            }).addTo(map);
+
+            marker.bindTooltip(day.location, {
+                permanent: false,
+                direction: 'top',
+                className: 'city-label'
+            });
+
+            cityMarkers[day.location] = marker;
+        });
+
+        // Car marker
+        const carIcon = L.divIcon({
+            html: '<div class="car-marker">🚗</div>',
+            iconSize: [40, 40],
+            iconAnchor: [20, 20],
+            className: ''
+        });
+
+        const carMarker = L.marker(tripDays[0].coords, { icon: carIcon }).addTo(map);
+
+        // State
+        let currentDay = 1;
+        let isPlaying = false;
+        let playInterval = null;
+
+        // DOM elements
+        const slider = document.getElementById('daySlider');
+        const currentDaySpan = document.getElementById('currentDay');
+        const dayInfo = document.getElementById('dayInfo');
+        const playBtn = document.getElementById('playBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const progressFill = document.getElementById('progressFill');
+        const progressPercent = document.getElementById('progressPercent');
+        const kmTraveled = document.getElementById('kmTraveled');
+        const countriesVisited = document.getElementById('countriesVisited');
+
+        // Update display
+        function updateDisplay(day) {
+            const data = tripDays[day - 1];
+
+            // Update slider and day display
+            slider.value = day;
+            currentDaySpan.textContent = day;
+
+            // Update progress
+            const progress = ((day - 1) / (tripDays.length - 1)) * 100;
+            progressFill.style.width = `${progress}%`;
+            progressPercent.textContent = `${Math.round(progress)}%`;
+
+            // Update stats
+            kmTraveled.textContent = data.kmFromStart.toLocaleString();
+            countriesVisited.textContent = data.countries.length;
+
+            // Move car
+            carMarker.setLatLng(data.coords);
+
+            // Update traveled route
+            const traveledCoords = [];
+            for (let i = 0; i < day; i++) {
+                traveledCoords.push(tripDays[i].coords);
+            }
+            traveledRoute.setLatLngs(traveledCoords);
+
+            // Update city markers
+            Object.keys(cityMarkers).forEach(loc => {
+                const marker = cityMarkers[loc];
+                const visited = tripDays.slice(0, day).some(d => d.location === loc);
+                const isCurrent = data.location === loc;
+
+                if (isCurrent) {
+                    marker.setStyle({ fillColor: '#f59e0b', color: '#f59e0b', radius: 8 });
+                } else if (visited) {
+                    marker.setStyle({ fillColor: '#22c55e', color: '#22c55e', radius: 6 });
+                } else {
+                    marker.setStyle({ fillColor: '#3b82f6', color: '#fff', radius: 6 });
+                }
+            });
+
+            // Center map on current location
+            map.panTo(data.coords, { animate: true, duration: 0.5 });
+
+            // Update day info card
+            dayInfo.innerHTML = `
+                <div class="day-info-header">
+                    <span class="location-icon">${data.icon}</span>
+                    <div>
+                        <div class="location-name">${data.location}</div>
+                        <div class="location-country">${data.country}</div>
+                        <span class="day-type type-${data.type}">${data.typeLabel}</span>
+                    </div>
+                </div>
+                <p class="day-description">${data.description}</p>
+                <div class="day-highlights">
+                    <h4>Today's Highlights</h4>
+                    <ul class="highlight-list">
+                        ${data.highlights.map(h => `<li>${h}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+        }
+
+        // Event listeners
+        slider.addEventListener('input', (e) => {
+            currentDay = parseInt(e.target.value);
+            updateDisplay(currentDay);
+        });
+
+        playBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                // Stop
+                clearInterval(playInterval);
+                isPlaying = false;
+                playBtn.textContent = '▶ Play Trip';
+                playBtn.classList.remove('playing');
+            } else {
+                // Start
+                if (currentDay >= 14) currentDay = 1;
+                isPlaying = true;
+                playBtn.textContent = '⏸ Pause';
+                playBtn.classList.add('playing');
+
+                playInterval = setInterval(() => {
+                    currentDay++;
+                    if (currentDay > 14) {
+                        clearInterval(playInterval);
+                        isPlaying = false;
+                        playBtn.textContent = '▶ Play Trip';
+                        playBtn.classList.remove('playing');
+                        currentDay = 14;
+                    }
+                    updateDisplay(currentDay);
+                }, 2000);
+            }
+        });
+
+        resetBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                clearInterval(playInterval);
+                isPlaying = false;
+                playBtn.textContent = '▶ Play Trip';
+                playBtn.classList.remove('playing');
+            }
+            currentDay = 1;
+            updateDisplay(currentDay);
+            map.setView([49.5, 14.5], 6);
+        });
+
+        // Initialize
+        updateDisplay(1);
+    </script>
+</body>
+</html>
