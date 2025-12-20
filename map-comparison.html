@@ -27,6 +27,7 @@
             --success: #2d5a3d;
             --gemini: #4285f4;
             --current: #2d5a3d;
+            --hybrid: #9333ea;
         }
 
         body {
@@ -165,6 +166,14 @@
             color: var(--primary);
         }
 
+        .toggle-btn.hybrid {
+            border-color: var(--hybrid);
+        }
+
+        .toggle-btn.hybrid.active {
+            background: var(--hybrid);
+        }
+
         .legend {
             background: var(--primary);
             padding: 1rem;
@@ -211,6 +220,10 @@
             );
         }
 
+        .legend-line.hybrid {
+            background: var(--hybrid);
+        }
+
         .route-info {
             background: var(--primary);
             padding: 1rem;
@@ -238,6 +251,10 @@
 
         .route-info h3 .dot.gemini {
             background: var(--gemini);
+        }
+
+        .route-info h3 .dot.hybrid {
+            background: var(--hybrid);
         }
 
         .route-stats {
@@ -405,7 +422,8 @@
             <div class="route-toggle">
                 <button class="toggle-btn current active" data-route="current">Current</button>
                 <button class="toggle-btn gemini" data-route="gemini">Gemini</button>
-                <button class="toggle-btn both" data-route="both">Both</button>
+                <button class="toggle-btn hybrid" data-route="hybrid">Hybrid</button>
+                <button class="toggle-btn both" data-route="all">All</button>
             </div>
 
             <div class="legend">
@@ -417,6 +435,10 @@
                 <div class="legend-item">
                     <div class="legend-line gemini"></div>
                     <span>Gemini Route (Vienna Start)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-line hybrid"></div>
+                    <span>Hybrid Route (Best of Both)</span>
                 </div>
                 <div class="legend-item">
                     <div class="legend-line backtrack"></div>
@@ -462,27 +484,59 @@
                 </div>
             </div>
 
+            <div class="route-info" id="hybridInfo" style="display: none;">
+                <h3><span class="dot hybrid"></span> Hybrid Itinerary</h3>
+                <div class="route-stats">
+                    <div class="route-stat">
+                        <div class="route-stat-value">1,630</div>
+                        <div class="route-stat-label">Total KM</div>
+                    </div>
+                    <div class="route-stat">
+                        <div class="route-stat-value">6</div>
+                        <div class="route-stat-label">Driving Days</div>
+                    </div>
+                </div>
+                <div class="route-path">
+                    Prague <span class="arrow">→</span> Krumlov <span class="arrow">→</span> Salzburg <span class="arrow">→</span> Innsbruck <span class="arrow">→</span> Hallstatt <span class="arrow">→</span> Vienna <span class="arrow">→</span> Budapest <span class="arrow">→</span> Prague
+                </div>
+                <div style="background: rgba(147, 51, 234, 0.2); border: 1px solid #9333ea; padding: 1rem; margin-top: 1rem;">
+                    <h4 style="color: #c084fc; margin-bottom: 0.5rem;">Best of Both</h4>
+                    <p style="font-size: 0.8rem; color: rgba(255,255,255,0.8);">Prague start + Innsbruck Alps + Budapest near end. No backtracking, clean circular route. Day 14 buffer for Bohemian Switzerland.</p>
+                </div>
+            </div>
+
             <div class="comparison-summary">
                 <h3>Quick Comparison</h3>
                 <div class="comparison-row">
-                    <span class="label">Total Distance</span>
+                    <span class="label">Distance</span>
                     <div class="values">
-                        <span class="current-val">1,400 km</span>
-                        <span class="gemini-val">1,820 km</span>
+                        <span class="current-val" title="Current">1,400</span>
+                        <span class="gemini-val" title="Gemini">1,820</span>
+                        <span style="color: #9333ea; font-weight: 600;" title="Hybrid">1,630</span>
                     </div>
                 </div>
                 <div class="comparison-row">
-                    <span class="label">Longest Drive</span>
+                    <span class="label">Alps</span>
                     <div class="values">
-                        <span class="current-val">525 km</span>
-                        <span class="gemini-val">525 km</span>
-                    </div>
-                </div>
-                <div class="comparison-row">
-                    <span class="label">Backtracking</span>
-                    <div class="values">
-                        <span class="current-val">Minimal</span>
+                        <span class="current-val">No</span>
                         <span class="gemini-val">Yes</span>
+                        <span style="color: #9333ea; font-weight: 600;">Yes</span>
+                    </div>
+                </div>
+                <div class="comparison-row">
+                    <span class="label">Backtrack</span>
+                    <div class="values">
+                        <span class="current-val">Min</span>
+                        <span class="gemini-val">Yes</span>
+                        <span style="color: #9333ea; font-weight: 600;">No</span>
+                    </div>
+                </div>
+                <div class="comparison-row">
+                    <span class="label">Buffer Day</span>
+                    <div class="values">
+                        <span class="current-val">1-2</span>
+                        <span class="gemini-val">0</span>
+                        <span style="color: #9333ea; font-weight: 600;">1</span>
                     </div>
                 </div>
             </div>
@@ -534,6 +588,19 @@
             cities.vienna.coords
         ];
 
+        // Hybrid route (Prague start, includes Alps)
+        const hybridRoute = [
+            cities.prague.coords,
+            cities.ceskyKrumlov.coords,
+            cities.salzburg.coords,
+            cities.innsbruck.coords,
+            cities.hallstatt.coords,
+            cities.vienna.coords,
+            cities.bratislava.coords,
+            cities.budapest.coords,
+            cities.prague.coords
+        ];
+
         // Backtrack segment (Budapest to Prague)
         const backtrackRoute = [
             cities.budapest.coords,
@@ -574,6 +641,12 @@
             dashArray: '10, 10'
         });
 
+        const hybridPolyline = L.polyline(hybridRoute, {
+            color: '#9333ea',
+            weight: 5,
+            opacity: 0.9
+        });
+
         // City markers
         const cityMarkers = [];
 
@@ -588,6 +661,8 @@
                 citiesToShow = ['prague', 'bohemianSwitz', 'ceskyKrumlov', 'salzburg', 'vienna', 'bratislava', 'budapest', 'brno', 'kutnaHora'];
             } else if (forRoute === 'gemini') {
                 citiesToShow = ['vienna', 'budapest', 'prague', 'ceskyKrumlov', 'salzburg', 'innsbruck', 'hallstatt'];
+            } else if (forRoute === 'hybrid') {
+                citiesToShow = ['prague', 'ceskyKrumlov', 'salzburg', 'innsbruck', 'hallstatt', 'vienna', 'bratislava', 'budapest'];
             } else {
                 citiesToShow = ['prague', 'bohemianSwitz', 'ceskyKrumlov', 'salzburg', 'vienna', 'bratislava', 'budapest', 'innsbruck', 'hallstatt', 'brno', 'kutnaHora'];
             }
@@ -613,7 +688,7 @@
             });
 
             // Add start/end markers
-            if (forRoute === 'current' || forRoute === 'both') {
+            if (forRoute === 'current' || forRoute === 'all') {
                 const pragueStart = L.circleMarker(cities.prague.coords, {
                     radius: 10,
                     fillColor: '#2d5a3d',
@@ -626,7 +701,7 @@
                 cityMarkers.push(pragueStart);
             }
 
-            if (forRoute === 'gemini' || forRoute === 'both') {
+            if (forRoute === 'gemini' || forRoute === 'all') {
                 const viennaStart = L.circleMarker(cities.vienna.coords, {
                     radius: 10,
                     fillColor: '#4285f4',
@@ -638,6 +713,19 @@
                 viennaStart.bindTooltip('Vienna (Gemini Start/End)', { permanent: false, direction: 'top', className: 'city-label' });
                 cityMarkers.push(viennaStart);
             }
+
+            if (forRoute === 'hybrid') {
+                const pragueHybrid = L.circleMarker(cities.prague.coords, {
+                    radius: 10,
+                    fillColor: '#9333ea',
+                    color: '#fff',
+                    weight: 3,
+                    opacity: 1,
+                    fillOpacity: 1
+                }).addTo(map);
+                pragueHybrid.bindTooltip('Prague (Hybrid Start/End)', { permanent: false, direction: 'top', className: 'city-label' });
+                cityMarkers.push(pragueHybrid);
+            }
         }
 
         // Show route function
@@ -646,16 +734,19 @@
             map.removeLayer(currentPolyline);
             map.removeLayer(geminiPolyline);
             map.removeLayer(backtrackPolyline);
+            map.removeLayer(hybridPolyline);
 
             // Update button states
             document.querySelectorAll('.toggle-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
-            document.querySelector(`.toggle-btn.${route === 'both' ? 'both' : route}`).classList.add('active');
+            const btnClass = route === 'all' ? 'both' : route;
+            document.querySelector(`.toggle-btn.${btnClass}`).classList.add('active');
 
             // Show/hide route info
-            document.getElementById('currentInfo').style.display = (route === 'current' || route === 'both') ? 'block' : 'none';
-            document.getElementById('geminiInfo').style.display = (route === 'gemini' || route === 'both') ? 'block' : 'none';
+            document.getElementById('currentInfo').style.display = (route === 'current' || route === 'all') ? 'block' : 'none';
+            document.getElementById('geminiInfo').style.display = (route === 'gemini' || route === 'all') ? 'block' : 'none';
+            document.getElementById('hybridInfo').style.display = (route === 'hybrid' || route === 'all') ? 'block' : 'none';
 
             // Add routes based on selection
             if (route === 'current') {
@@ -667,14 +758,19 @@
                 backtrackPolyline.addTo(map);
                 addCityMarkers('gemini');
                 map.fitBounds(geminiPolyline.getBounds(), { padding: [50, 50] });
+            } else if (route === 'hybrid') {
+                hybridPolyline.addTo(map);
+                addCityMarkers('hybrid');
+                map.fitBounds(hybridPolyline.getBounds(), { padding: [50, 50] });
             } else {
                 currentPolyline.addTo(map);
                 geminiPolyline.addTo(map);
+                hybridPolyline.addTo(map);
                 backtrackPolyline.addTo(map);
-                addCityMarkers('both');
+                addCityMarkers('all');
 
-                // Fit to show both routes
-                const allCoords = [...currentRoute, ...geminiRoute];
+                // Fit to show all routes
+                const allCoords = [...currentRoute, ...geminiRoute, ...hybridRoute];
                 const bounds = L.latLngBounds(allCoords);
                 map.fitBounds(bounds, { padding: [50, 50] });
             }
