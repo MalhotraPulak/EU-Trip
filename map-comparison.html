@@ -503,7 +503,7 @@
             innsbruck: { name: "Innsbruck", coords: [47.2692, 11.4041], country: "AT" },
             hallstatt: { name: "Hallstatt", coords: [47.5622, 13.6493], country: "AT" },
             brno: { name: "Brno", coords: [49.1951, 16.6068], country: "CZ" },
-            dresden: { name: "Dresden", coords: [51.0504, 13.7373], country: "DE" }
+            kutnaHora: { name: "Kutná Hora", coords: [49.9481, 15.2686], country: "CZ" }
         };
 
         // Current route (Prague start)
@@ -518,7 +518,7 @@
             cities.bratislava.coords,
             cities.budapest.coords,
             cities.brno.coords,
-            cities.dresden.coords,
+            cities.kutnaHora.coords,
             cities.prague.coords
         ];
 
@@ -585,11 +585,11 @@
             let citiesToShow = [];
 
             if (forRoute === 'current') {
-                citiesToShow = ['prague', 'bohemianSwitz', 'ceskyKrumlov', 'salzburg', 'vienna', 'bratislava', 'budapest', 'brno', 'dresden'];
+                citiesToShow = ['prague', 'bohemianSwitz', 'ceskyKrumlov', 'salzburg', 'vienna', 'bratislava', 'budapest', 'brno', 'kutnaHora'];
             } else if (forRoute === 'gemini') {
                 citiesToShow = ['vienna', 'budapest', 'prague', 'ceskyKrumlov', 'salzburg', 'innsbruck', 'hallstatt'];
             } else {
-                citiesToShow = ['prague', 'bohemianSwitz', 'ceskyKrumlov', 'salzburg', 'vienna', 'bratislava', 'budapest', 'innsbruck', 'hallstatt', 'brno', 'dresden'];
+                citiesToShow = ['prague', 'bohemianSwitz', 'ceskyKrumlov', 'salzburg', 'vienna', 'bratislava', 'budapest', 'innsbruck', 'hallstatt', 'brno', 'kutnaHora'];
             }
 
             citiesToShow.forEach(cityKey => {
