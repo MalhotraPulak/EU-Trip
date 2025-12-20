@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Public Transport Itinerary - EU Trip 2026</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        .transport-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #059669 0%, #0891b2 100%);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-left: 0.5rem;
+        }
+        .route-highlight {
+            background: linear-gradient(135deg, rgba(5, 150, 105, 0.1) 0%, rgba(8, 145, 178, 0.1) 100%);
+            border-left: 4px solid;
+            border-image: linear-gradient(180deg, #059669, #0891b2) 1;
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+        }
+        .transport-info {
+            background: rgba(5, 150, 105, 0.1);
+            border-left: 4px solid #059669;
+            padding: 0.75rem 1rem;
+            margin: 0.5rem 0;
+        }
+        .transport-info strong {
+            color: #059669;
+        }
+        .train-badge {
+            display: inline-block;
+            background: #059669;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+        .bus-badge {
+            display: inline-block;
+            background: #0891b2;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+        .shuttle-badge {
+            display: inline-block;
+            background: #7c3aed;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+        .buffer-day {
+            background: #fef3c7;
+            border: 2px dashed #d69e2e;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        .buffer-day h4 {
+            color: #b7791f;
+        }
+        .party-night {
+            background: rgba(139, 38, 53, 0.1);
+            border-left: 4px solid var(--accent);
+            padding: 0.75rem 1rem;
+            margin: 0.5rem 0;
+        }
+        .alpine-highlight {
+            background: rgba(66, 133, 244, 0.1);
+            border-left: 4px solid #4285f4;
+            padding: 0.75rem 1rem;
+            margin: 0.5rem 0;
+        }
+        .cost-comparison {
+            background: var(--light);
+            border: 2px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .savings-highlight {
+            background: #dcfce7;
+            border: 2px solid #059669;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+        .savings-highlight strong {
+            color: #059669;
+            font-size: 1.25rem;
+        }
+        .booking-tip {
+            background: #fef3c7;
+            border-left: 4px solid #d69e2e;
+            padding: 0.75rem 1rem;
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <span class="nav-icon">CE</span>
+            <a href="../index.html" style="text-decoration: none; color: inherit;">EU Trip 2026</a>
+        </div>
+        <div class="nav-links">
+            <a href="../index.html">Home</a>
+            <a href="../comparison.html">Comparison</a>
+            <a href="itinerary-hybrid.html">Car Version</a>
+            <a href="itinerary.html">Current</a>
+        </div>
+    </nav>
+
+    <div class="doc-container">
+        <a href="../comparison.html" class="back-link">Back to Comparison</a>
+
+        <header class="doc-header">
+            <h1>Public Transport Itinerary <span class="transport-badge">No Car Needed</span></h1>
+            <p class="doc-meta">15-Day Central Europe Trip | April 11-25, 2026 | Trains, Buses & Shuttles</p>
+        </header>
+
+        <div class="doc-content">
+            <h2>Why Public Transport?</h2>
+            <p>Based on extensive research from Reddit, Rick Steves forums, and TripAdvisor, dropping the rental cars for this route makes a lot of sense:</p>
+            <ul>
+                <li><strong>No parking hassles</strong> in Prague, Vienna, Budapest (expensive + difficult)</li>
+                <li><strong>No cross-border fees</strong> (can be 100-300+ per car)</li>
+                <li><strong>No driving stress</strong> - European roads, signs, rules</li>
+                <li><strong>Drink freely</strong> on party nights without worrying about driving next day</li>
+                <li><strong>Trains are often faster</strong> than driving between major cities</li>
+                <li><strong>More relaxing</strong> - enjoy scenery, nap, chat with friends</li>
+            </ul>
+
+            <div class="savings-highlight">
+                <strong>Estimated Savings: 5,000-15,000 per person</strong><br>
+                (No car rental, insurance, cross-border fees, fuel, vignettes, parking)
+            </div>
+
+            <div class="route-highlight">
+                <strong>The Route:</strong><br>
+                Prague (Start) --> Cesky Krumlov --> Salzburg --> Innsbruck --> Vienna --> Budapest --> Prague (End)
+            </div>
+
+            <blockquote>"For this itinerary, there is no need to rent a car. It is very easy to travel between Budapest, Vienna, and Prague by train." - TripAdvisor community consensus</blockquote>
+
+            <h2>Trip Overview</h2>
+            <table>
+                <tr><th>Duration</th><td>15 Days (April 11-25, 2026)</td></tr>
+                <tr><th>Travelers</th><td>5 people (2 girls, 3 guys, ages 25-27)</td></tr>
+                <tr><th>Transport</th><td>Trains + Buses + Shuttles</td></tr>
+                <tr><th>Countries</th><td>Czech Republic, Austria, Hungary</td></tr>
+                <tr><th>Party Nights</th><td>4 (Days 2, 9, 11, 12)</td></tr>
+                <tr><th>Key Operators</th><td>RegioJet, OBB Railjet, FlixBus, CK Shuttle</td></tr>
+            </table>
+
+            <h2>Key Route Modification</h2>
+            <p>The main change from the car version: <strong>Hallstatt becomes a day trip from Salzburg</strong> rather than an overnight stay. This is actually how most travelers do it by public transport, and locals recommend it because:</p>
+            <ul>
+                <li>Hallstatt is tiny - you only need 3-4 hours there</li>
+                <li>Accommodation in Hallstatt is expensive and limited</li>
+                <li>The train+ferry journey is scenic and part of the experience</li>
+                <li>More time in Salzburg (which has more to offer)</li>
+            </ul>
+
+            <hr>
+
+            <h2>Transport Cost Summary</h2>
+            <table>
+                <tr><th>Route</th><th>Mode</th><th>Time</th><th>Cost (per person)</th></tr>
+                <tr><td>Prague --> Cesky Krumlov</td><td>Bus (RegioJet/FlixBus)</td><td>2h 35m</td><td>6-14 (~700)</td></tr>
+                <tr><td>Cesky Krumlov --> Salzburg</td><td>Shuttle (CK Shuttle)</td><td>3h</td><td>25-35 (~2,500)</td></tr>
+                <tr><td>Salzburg --> Hallstatt (day trip)</td><td>Bus + Train + Ferry</td><td>2h 30m</td><td>15 each way (~2,700 return)</td></tr>
+                <tr><td>Salzburg --> Innsbruck</td><td>Train (OBB Railjet)</td><td>1h 50m</td><td>20-35 (~2,500)</td></tr>
+                <tr><td>Innsbruck --> Vienna</td><td>Train (OBB Railjet)</td><td>4h 15m</td><td>30-50 (~3,600)</td></tr>
+                <tr><td>Vienna --> Budapest</td><td>Train (Railjet)</td><td>2h 30m</td><td>16-30 (~2,000)</td></tr>
+                <tr><td>Budapest --> Prague</td><td>Train (RegioJet)</td><td>7h</td><td>16-25 (~1,800)</td></tr>
+                <tr><td>Day 14 Bohemian Switz. Tour</td><td>Organized Tour</td><td>10h</td><td>~100 (~9,000)</td></tr>
+                <tr style="font-weight: bold; background: var(--light);"><td colspan="3">TOTAL TRANSPORT</td><td>~25,000-30,000</td></tr>
+            </table>
+
+            <div class="cost-comparison">
+                <h4>Cost Comparison vs Car Rental</h4>
+                <table>
+                    <tr><th>Item</th><th>Car Rental</th><th>Public Transport</th></tr>
+                    <tr><td>Base transport</td><td>27,000-35,000</td><td>16,000-20,000</td></tr>
+                    <tr><td>Cross-border fees</td><td>~8,000</td><td>0</td></tr>
+                    <tr><td>Fuel</td><td>~3,000</td><td>0</td></tr>
+                    <tr><td>Vignettes</td><td>~2,000</td><td>0</td></tr>
+                    <tr><td>Parking</td><td>~3,000</td><td>0</td></tr>
+                    <tr><td>Bohemian Switz. Tour</td><td>Included (self-drive)</td><td>~9,000</td></tr>
+                    <tr style="font-weight: bold;"><td>TOTAL</td><td>43,000-51,000</td><td>25,000-30,000</td></tr>
+                </table>
+            </div>
+
+            <hr>
+
+            <h2>Day-by-Day Itinerary</h2>
+
+            <h3>DAY 1 - Friday, April 11: Arrival in Prague</h3>
+            <p><strong>Fly into:</strong> Prague (PRG) - Vaclav Havel Airport</p>
+            <div class="transport-info">
+                <strong>Airport Transfer:</strong> Airport Express Bus (AE) to main train station - 30 min, ~100 CZK (~400). Or Uber/Bolt ~500.
+            </div>
+            <h4>Activities:</h4>
+            <ul>
+                <li>Arrive and take airport bus/taxi to city center</li>
+                <li>Check into accommodation in Old Town or Vinohrady</li>
+                <li>Evening walk through Old Town Square</li>
+                <li>Welcome dinner at a traditional Czech restaurant</li>
+                <li>Light drinks - save energy for tomorrow!</li>
+            </ul>
+            <p><strong>Accommodation:</strong> Prague (~1,500-2,500/person/night)</p>
+
+            <hr>
+
+            <h3>DAY 2 - Saturday, April 12: Prague City + Party Night 1</h3>
+            <p><em>Type: Historical + Party</em></p>
+            <h4>Morning:</h4>
+            <ul>
+                <li>Prague Castle complex (3-4 hours)</li>
+                <li>St. Vitus Cathedral</li>
+                <li>Golden Lane</li>
+            </ul>
+            <h4>Afternoon:</h4>
+            <ul>
+                <li>Walk across Charles Bridge</li>
+                <li>Lesser Town (Mala Strana) exploration</li>
+                <li>Petrin Hill for views (take funicular - included in transit pass)</li>
+            </ul>
+            <div class="party-night">
+                <strong>PARTY NIGHT 1:</strong> Karlovy Lazne (5-floor megaclub) or Cross Club (industrial techno). Beer is cheaper than water - enjoy! No driving tomorrow until afternoon.
+            </div>
+            <p><strong>Transport:</strong> Prague day pass 120 CZK (~500) covers all trams, metro, funicular</p>
+
+            <hr>
+
+            <h3>DAY 3 - Sunday, April 13: Prague --> Cesky Krumlov <span class="bus-badge">Bus 2h 35m</span></h3>
+            <p><em>Type: Fairytale Town + Chill Day</em></p>
+            <div class="transport-info">
+                <strong>Transport:</strong> RegioJet or FlixBus from Prague Na Knizeci to Cesky Krumlov Spicak. Buses every hour. Book at regiojet.com or flixbus.com. Cost: 6-14 per person.
+            </div>
+            <h4>Morning:</h4>
+            <ul>
+                <li>Sleep in, recover from last night</li>
+                <li>Brunch in Prague</li>
+                <li>Take 12:00 or 13:00 bus (no need to rush!)</li>
+            </ul>
+            <h4>Afternoon:</h4>
+            <ul>
+                <li>Arrive Cesky Krumlov around 3 PM</li>
+                <li>Bus station is 5-minute walk to Old Town</li>
+                <li>Check in, explore the medieval streets</li>
+            </ul>
+            <h4>Evening:</h4>
+            <ul>
+                <li>Cesky Krumlov Castle viewpoint at sunset</li>
+                <li>Dinner at a riverside restaurant</li>
+                <li>Relaxed drinks - enjoy the fairytale atmosphere</li>
+            </ul>
+            <p><strong>Accommodation:</strong> Cesky Krumlov (~1,200-2,000/person)</p>
+            <blockquote>Day-trippers leave by 5 PM. The town transforms into a quiet, magical place. This is why you stay overnight!</blockquote>
+
+            <hr>
+
+            <h3>DAY 4 - Monday, April 14: Cesky Krumlov --> Salzburg <span class="shuttle-badge">Shuttle 3h</span></h3>
+            <p><em>Type: Scenic Transfer + Mozart City</em></p>
+            <div class="transport-info">
+                <strong>Transport:</strong> CK Shuttle or Bean Shuttle - door-to-door service in 8-seat minivan. They pick you up from your hotel! Book at ckshuttle.cz or beanshuttle.com. Cost: 25-35 per person.
+            </div>
+            <h4>Morning:</h4>
+            <ul>
+                <li>Early morning walk through Krumlov (best light for photos)</li>
+                <li>Breakfast at a local cafe</li>
+                <li>Shuttle picks you up at 10:00 or 11:00 (book specific time)</li>
+            </ul>
+            <h4>Afternoon:</h4>
+            <ul>
+                <li>Scenic drive through Austrian countryside</li>
+                <li>Arrive Salzburg around 1-2 PM</li>
+                <li>Shuttle drops you at your hotel</li>
+            </ul>
+            <h4>Evening:</h4>
+            <ul>
+                <li>Explore Altstadt (Old Town) - very walkable!</li>
+                <li>Mirabell Gardens (free, Sound of Music location!)</li>
+                <li>Dinner with views of Hohensalzburg Fortress</li>
+                <li>Drinks on Rudolfskai bar street</li>
+            </ul>
+            <p><strong>Accommodation:</strong> Salzburg (~2,000-3,000/person) - stay 2 nights</p>
+            <div class="booking-tip">
+                <strong>Tip:</strong> Book the shuttle 1-2 weeks ahead in April. They fill up!
+            </div>
+
+            <hr>
+
+            <h3>DAY 5 - Tuesday, April 15: Hallstatt Day Trip <span class="train-badge">Train + Ferry</span></h3>
+            <p><em>Type: Alpine Lake Village</em></p>
+            <div class="transport-info">
+                <strong>Transport:</strong> Bus 150 from Salzburg Hbf to Bad Ischl (1h 15m), then train to Hallstatt Bahnhof (25min), then ferry across the lake (7min). Total: ~2.5 hours, 14.60 each way. Or take organized tour (~50).
+            </div>
+            <div class="alpine-highlight">
+                <strong>Why Day Trip Works Better:</strong> Hallstatt is tiny (800 residents). 3-4 hours is plenty. Crowds are 10 AM - 5 PM, so arrive early, leave by 4 PM. No need to pay premium for overnight stay.
+            </div>
+            <h4>Early Morning:</h4>
+            <ul>
+                <li>Take 8:45 bus from Salzburg Hbf</li>
+                <li>Arrive Hallstatt around 11:00</li>
+                <li>The ferry ride across the lake is magical!</li>
+            </ul>
+            <h4>Midday:</h4>
+            <ul>
+                <li>Famous lakeside viewpoint photo</li>
+                <li>Wander the tiny streets</li>
+                <li>Lunch at a lakeside restaurant</li>
+                <li>Optional: Salt mine tour or Skywalk (add 2 hours)</li>
+            </ul>
+            <h4>Afternoon:</h4>
+            <ul>
+                <li>Take 3:30 or 4:30 PM ferry back</li>
+                <li>Return to Salzburg by 6-7 PM</li>
+            </ul>
+            <h4>Evening:</h4>
+            <ul>
+                <li>Dinner in Salzburg</li>
+                <li>Relaxed evening - big train day tomorrow</li>
+            </ul>
+            <blockquote>"You don't need a car in Hallstatt. It's tiny and all pedestrian. The train + ferry is part of the experience!" - Rick Steves Forum</blockquote>
+
+            <hr>
+
+            <h3>DAY 6 - Wednesday, April 16: Salzburg --> Innsbruck <span class="train-badge">Train 1h 50m</span></h3>
+            <p><em>Type: Transfer + Alpine City</em></p>
+            <div class="transport-info">
+                <strong>Transport:</strong> OBB Railjet from Salzburg Hbf to Innsbruck Hbf. Trains every hour. Beautiful alpine scenery! Book at oebb.at. Cost: 20-35.
+            </div>
+            <h4>Morning:</h4>
+            <ul>
+                <li>Visit Hohensalzburg Fortress (funicular up)</li>
+                <li>Mozart's Birthplace photo op</li>
+                <li>Grab coffee and Sachertorte</li>
+            </ul>
+            <h4>Midday:</h4>
+            <ul>
+                <li>Take 12:00 or 13:00 train to Innsbruck</li>
+                <li>Enjoy the alpine scenery from the train!</li>
+                <li>Arrive Innsbruck around 2 PM</li>
+            </ul>
+            <h4>Afternoon:</h4>
+            <ul>
+                <li>Check in to accommodation (central = walking distance to everything)</li>
+                <li>Walk through Maria-Theresien-Strasse</li>
+                <li>Golden Roof photo</li>
+                <li>Explore the old town</li>
+            </ul>
+            <h4>Evening:</h4>
+            <ul>
+                <li>Dinner in the old town</li>
+                <li>Early-ish night - big mountain day tomorrow!</li>
+            </ul>
+            <p><strong>Accommodation:</strong> Innsbruck (~2,500-3,500/person)</p>
+
+            <hr>
+
+            <h3>DAY 7 - Thursday, April 17: Innsbruck Full Day - Nordkette</h3>
+            <p><em>Type: Alpine Adventure</em></p>
+            <div class="alpine-highlight">
+                <strong>Nordkette Mountain:</strong> Cable car takes you from city center to 2,334m in 20 minutes. Views of the entire Tyrolean Alps! No car needed - the Hungerburgbahn station is right in the old town.
+            </div>
+            <h4>Morning:</h4>
+            <ul>
+                <li>Nordkette cable car (Hungerburgbahn --> Seegrube --> Hafelekar)</li>
+                <li>Buy combined ticket (~47)</li>
+                <li>Spend 2-3 hours at the top</li>
+                <li>Short hikes available at summit</li>
+            </ul>
+            <h4>Afternoon:</h4>
+            <ul>
+                <li>Descend and grab lunch</li>
+                <li>Explore old town - Hofburg Palace, Hofkirche</li>
+                <li>Coffee and cake at a traditional cafe</li>
+            </ul>
+            <h4>Evening:</h4>
+            <ul>
+                <li>Dinner at a traditional Tyrolean restaurant</li>
+                <li>Pack for Vienna tomorrow</li>
+            </ul>
+            <blockquote>April at 2,300m can be cold (-2 to 5C). Bring warm layers! The views are worth it.</blockquote>
+
+            <hr>
+
+            <h3>DAY 8 - Friday, April 18: Innsbruck --> Vienna <span class="train-badge">Train 4h 15m</span></h3>
+            <p><em>Type: Scenic Train + Imperial City</em></p>
+            <div class="transport-info">
+                <strong>Transport:</strong> OBB Railjet direct from Innsbruck to Vienna Hbf. Beautiful alpine-to-plains scenery! Book at oebb.at. Cost: 30-50. Book early for best prices.
+            </div>
+            <h4>Morning:</h4>
+            <ul>
+                <li>Last walk through Innsbruck</li>
+                <li>Breakfast at a cafe</li>
+                <li>Take 9:00 or 10:00 train</li>
+            </ul>
+            <h4>Afternoon:</h4>
+            <ul>
+                <li>Arrive Vienna around 2-3 PM</li>
+                <li>Check into accommodation in Innere Stadt or Neubau</li>
+                <li>Vienna has excellent U-bahn (metro) - get a 48-hour pass (14.10)</li>
+            </ul>
+            <h4>Evening:</h4>
+            <ul>
+                <li>Evening walk along the Ringstrasse</li>
+                <li>Dinner at Naschmarkt area (if staying nearby)</li>
+                <li>Rest up - party night tomorrow!</li>
+            </ul>
+            <p><strong>Accommodation:</strong> Vienna (~2,000-3,000/person) - stay 2 nights</p>
+
+            <hr>
+
+            <h3>DAY 9 - Saturday, April 19: Vienna Full Day + Party Night 2</h3>
+            <p><em>Type: Culture + Nightlife</em></p>
+            <h4>Morning:</h4>
+            <ul>
+                <li>Schonbrunn Palace (U4 metro direct, arrive early, book online!)</li>
+                <li>Palace gardens are free and gorgeous</li>
+            </ul>
+            <h4>Afternoon:</h4>
+            <ul>
+                <li>Belvedere Palace (Klimt's "The Kiss")</li>
+                <li>St. Stephen's Cathedral</li>
+                <li>Coffee and cake at Cafe Central or Cafe Sacher</li>
+            </ul>
+            <div class="party-night">
+                <strong>PARTY NIGHT 2:</strong> Vienna nightlife is underrated! Try Pratersauna (club in a former sauna by the Danube), Flex (legendary electronic music), or bar-hop in the 7th District. No driving tomorrow until afternoon!
+            </div>
+            <p><strong>Transport:</strong> Vienna 48-hour pass covers unlimited U-bahn, trams, buses</p>
+
+            <hr>
+
+            <h3>DAY 10 - Sunday, April 20: Vienna --> Budapest <span class="train-badge">Train 2h 30m</span></h3>
+            <p><em>Type: Easy Train + Arrive Budapest</em></p>
+            <div class="transport-info">
+                <strong>Transport:</strong> OBB Railjet from Vienna Hbf to Budapest Keleti. Trains every 1-2 hours. Very comfortable! Can stop in Bratislava if you want (it's on the way). Cost: 16-30.
+            </div>
+            <h4>Morning:</h4>
+            <ul>
+                <li>Sleep in, recover from last night</li>
+                <li>Brunch somewhere nice in Vienna</li>
+                <li>Take 13:00 or 14:00 train</li>
+            </ul>
+            <h4>Optional Bratislava Stop:</h4>
+            <ul>
+                <li>Stop for 2-3 hours - it's on the train route!</li>
+                <li>Vienna --> Bratislava: 1 hour</li>
+                <li>Bratislava --> Budapest: 2.5 hours</li>
+                <li>Quick castle visit + old town walk + lunch</li>
+            </ul>
+            <h4>Evening:</h4>
+            <ul>
+                <li>Arrive Budapest by 5-6 PM</li>
+                <li>Check into District VII (Jewish Quarter)</li>
+                <li>Light dinner, rest up for the next two days!</li>
+            </ul>
+            <p><strong>Accommodation:</strong> Budapest District VII (~1,500-2,500/person) - stay 3 nights</p>
+            <div class="booking-tip">
+                <strong>Pro Tip:</strong> District VII is walking distance to everything + the ruin bars. You won't need public transport much here!
+            </div>
+
+            <hr>
+
+            <h3>DAY 11 - Monday, April 21: Budapest Day 1 + Party Night 3</h3>
+            <p><em>Type: Thermal Baths + History + Ruin Bars</em></p>
+            <h4>Morning:</h4>
+            <ul>
+                <li><strong>Szechenyi Thermal Baths</strong> - Iconic yellow bath complex</li>
+                <li>Take M1 metro to Szechenyi furdo station</li>
+                <li>Soak in outdoor pools, play chess in the water</li>
+            </ul>
+            <h4>Afternoon:</h4>
+            <ul>
+                <li>Heroes' Square (right next to the baths)</li>
+                <li>Walk down Andrassy Avenue</li>
+                <li>Hungarian Parliament Building (book tour in advance)</li>
+                <li>Shoes on the Danube memorial</li>
+            </ul>
+            <div class="party-night">
+                <strong>PARTY NIGHT 3:</strong> Ruin bar intro! Start at Szimpla Kert (6 PM), then Mazel Tov, then Instant-Fogas. These are legendary - free entry, 2-4 drinks, party until sunrise! All walkable from District VII.
+            </div>
+            <p><strong>Transport:</strong> Budapest 24-hour pass ~2,500 HUF (~600). But District VII is mostly walkable.</p>
+
+            <hr>
+
+            <h3>DAY 12 - Tuesday, April 22: Budapest Day 2 + Party Night 4</h3>
+            <p><em>Type: Explore + Epic Finale</em></p>
+            <h4>Late Morning:</h4>
+            <ul>
+                <li>Sleep in!</li>
+                <li>Brunch at a District VII cafe</li>
+            </ul>
+            <h4>Afternoon:</h4>
+            <ul>
+                <li>Walk across Chain Bridge to Buda side</li>
+                <li>Take funicular up to Buda Castle (or walk)</li>
+                <li>Fisherman's Bastion for views</li>
+                <li>Great street art in the Jewish Quarter</li>
+            </ul>
+            <div class="party-night">
+                <strong>PARTY NIGHT 4 - THE FINALE:</strong> Full ruin bar crawl! Eleszto (craft beer) --> Koleves Kert (hammocks) --> Instant-Fogas (multi-room club until 6 AM). Consider booking SPARTY pool party if it's on!
+            </div>
+            <blockquote>This is your last big party night. Make it count! Tomorrow is a chill travel day.</blockquote>
+
+            <hr>
+
+            <h3>DAY 13 - Wednesday, April 23: Budapest --> Prague <span class="train-badge">Train 7h</span></h3>
+            <p><em>Type: Long Train + Recovery</em></p>
+            <div class="transport-info">
+                <strong>Transport:</strong> RegioJet train from Budapest Keleti to Prague hl.n. 7 hours but very comfortable! Free WiFi, coffee, at-seat service. Or take night train and save a hotel night. Book at regiojet.com. Cost: 16-25.
+            </div>
+            <h4>Morning:</h4>
+            <ul>
+                <li>Sleep in as late as possible</li>
+                <li>Pack up, late brunch</li>
+                <li>Take 11:00 or 12:00 train</li>
+            </ul>
+            <h4>Afternoon:</h4>
+            <ul>
+                <li>7-hour train to Prague - perfect recovery!</li>
+                <li>Sleep, watch movies, read, chat</li>
+                <li>RegioJet has free coffee, water, snacks</li>
+                <li>This IS your rest day - embrace it</li>
+            </ul>
+            <h4>Evening:</h4>
+            <ul>
+                <li>Arrive Prague around 6-7 PM</li>
+                <li>Check into final accommodation</li>
+                <li>Chill dinner, early night</li>
+            </ul>
+            <p><strong>Accommodation:</strong> Prague (~1,500-2,500/person)</p>
+            <div class="booking-tip">
+                <strong>Alternative:</strong> Take the EuroNight sleeper train (departs ~8 PM, arrives ~6 AM). Save a hotel night + wake up in Prague! Couchette ~40.
+            </div>
+
+            <hr>
+
+            <h3>DAY 14 - Thursday, April 24: Buffer Day - Choose Your Adventure</h3>
+            <div class="buffer-day">
+                <h4>This day is intentionally flexible. Choose based on how you're feeling:</h4>
+                <p><strong>Option A: Bohemian Switzerland (Recommended!)</strong></p>
+                <div class="transport-info">
+                    <strong>Best Option:</strong> Organized tour from Prague. Includes transport, guide, Pravcicka Gate, boat ride, lunch. ~100/person. Book via Bohemia Adventures, Northern Hikes, or Viator.
+                </div>
+                <ul>
+                    <li>Pickup from Prague around 8 AM</li>
+                    <li>Europe's largest natural sandstone arch</li>
+                    <li>Kamenice Gorge boat ride</li>
+                    <li>Saxon Switzerland (Germany) viewpoints</li>
+                    <li>Return to Prague by 6-7 PM</li>
+                </ul>
+                <p><em>Note: Public transport to Bohemian Switzerland is possible but takes 3 hours each way. The tour is worth it!</em></p>
+
+                <p><strong>Option B: Kutna Hora (half day, less effort)</strong></p>
+                <div class="transport-info">
+                    <strong>Transport:</strong> Direct train from Prague hl.n. to Kutna Hora - 1 hour, ~150 CZK return.
+                </div>
+                <ul>
+                    <li>Sedlec Ossuary (Bone Church) - incredibly unique</li>
+                    <li>St. Barbara's Cathedral</li>
+                    <li>Back in Prague by 2 PM</li>
+                </ul>
+
+                <p><strong>Option C: Rest Day in Prague (if you're exhausted)</strong></p>
+                <ul>
+                    <li>Sleep in late</li>
+                    <li>Letna Park beer garden with city views</li>
+                    <li>Explore Vinohrady neighborhood</li>
+                    <li>Final souvenir shopping</li>
+                </ul>
+            </div>
+            <h4>Evening (all options):</h4>
+            <ul>
+                <li>Farewell dinner at a nice restaurant</li>
+                <li>Final drinks in Prague's Old Town</li>
+                <li>Pack for departure</li>
+            </ul>
+
+            <hr>
+
+            <h3>DAY 15 - Friday, April 25: Departure</h3>
+            <p><em>Type: Travel Day</em></p>
+            <div class="transport-info">
+                <strong>To Airport:</strong> Airport Express bus from Prague main station - 35 min, ~100 CZK. Or Uber/Bolt ~500.
+            </div>
+            <h4>Morning:</h4>
+            <ul>
+                <li>Check out of accommodation</li>
+                <li>Last walk through Old Town</li>
+                <li>Last coffee and trdelnik</li>
+            </ul>
+            <h4>Afternoon/Evening:</h4>
+            <ul>
+                <li>Head to Prague Airport</li>
+                <li>Fly back to India (typically evening flight)</li>
+                <li>Land in India: Saturday, April 26</li>
+            </ul>
+
+            <hr>
+
+            <h2>Transport Booking Guide</h2>
+            <table>
+                <tr><th>Operator</th><th>Routes</th><th>Book At</th><th>Book How Far Ahead</th></tr>
+                <tr><td>RegioJet</td><td>Prague-Krumlov, Budapest-Prague</td><td>regiojet.com</td><td>1-4 weeks (prices don't vary much)</td></tr>
+                <tr><td>FlixBus</td><td>Prague-Krumlov (backup)</td><td>flixbus.com</td><td>Anytime</td></tr>
+                <tr><td>CK Shuttle</td><td>Krumlov-Salzburg</td><td>ckshuttle.cz</td><td>1-2 weeks (fills up!)</td></tr>
+                <tr><td>OBB (Austrian Rail)</td><td>Salzburg-Innsbruck-Vienna-Budapest</td><td>oebb.at</td><td>2-8 weeks for best prices</td></tr>
+                <tr><td>Bohemia Adventures</td><td>Bohemian Switzerland tour</td><td>bohemiadventures.com</td><td>1 week</td></tr>
+            </table>
+
+            <div class="booking-tip">
+                <strong>Money-Saving Tip:</strong> OBB (Austrian Rail) has "Sparschiene" discount tickets that can be 50-70% cheaper if booked 2-4 weeks ahead. The earlier you book, the cheaper!
+            </div>
+
+            <hr>
+
+            <h2>What You'll Miss (And Why It's OK)</h2>
+            <table>
+                <tr><th>Missing</th><th>Why It's OK</th></tr>
+                <tr><td>Hallstatt overnight</td><td>Day trip is actually better - less crowded mornings/evenings, cheaper, and Salzburg has more to do</td></tr>
+                <tr><td>Gosausee stop</td><td>One less alpine lake, but you get Hallstatt lake + Nordkette mountains</td></tr>
+                <tr><td>Flexible countryside stops</td><td>Trade-off for zero stress, drinking freedom, and lower costs</td></tr>
+                <tr><td>Bohemian Switz. self-drive</td><td>Organized tour is actually recommended by locals - guides know the trails, includes boat + lunch</td></tr>
+            </table>
+
+            <hr>
+
+            <h2>What You Gain</h2>
+            <ul>
+                <li><strong>~15,000 savings per person</strong> on transport costs</li>
+                <li><strong>Zero driving stress</strong> - no foreign roads, parking, traffic</li>
+                <li><strong>Drink freely</strong> all 4 party nights without worrying</li>
+                <li><strong>Scenic train rides</strong> - the Salzburg-Innsbruck and Innsbruck-Vienna routes are gorgeous</li>
+                <li><strong>Rest on travel days</strong> - sleep on the Budapest-Prague train!</li>
+                <li><strong>No cross-border paperwork</strong> - just hop on trains</li>
+                <li><strong>More authentic experience</strong> - travel like Europeans do</li>
+            </ul>
+
+            <hr>
+
+            <h2>Summary by Theme</h2>
+
+            <h3>Party Nights (4)</h3>
+            <ol>
+                <li><strong>Day 2:</strong> Prague - Karlovy Lazne (5-floor club)</li>
+                <li><strong>Day 9:</strong> Vienna - Pratersauna, Flex</li>
+                <li><strong>Day 11:</strong> Budapest - Ruin bar intro (Szimpla Kert)</li>
+                <li><strong>Day 12:</strong> Budapest - Full ruin bar crawl finale</li>
+            </ol>
+
+            <h3>Alpine Highlights (3 days)</h3>
+            <ol>
+                <li><strong>Day 5:</strong> Hallstatt day trip (lake + village)</li>
+                <li><strong>Day 6:</strong> Salzburg-Innsbruck scenic train</li>
+                <li><strong>Day 7:</strong> Nordkette cable car (2,334m summit)</li>
+            </ol>
+
+            <h3>Historical/Cultural (5 days)</h3>
+            <ol>
+                <li>Prague Castle complex</li>
+                <li>Cesky Krumlov medieval town</li>
+                <li>Salzburg - Mozart's city, Sound of Music</li>
+                <li>Vienna - Schonbrunn, Belvedere, Klimt</li>
+                <li>Budapest - Parliament, Buda Castle, thermal baths</li>
+            </ol>
+
+            <hr>
+
+            <h2>Quick Facts</h2>
+            <table>
+                <tr><th>City</th><th>Nights</th><th>Main Transport</th><th>Currency</th></tr>
+                <tr><td>Prague</td><td>2 + 2</td><td>Tram/Metro</td><td>Czech Koruna (CZK)</td></tr>
+                <tr><td>Cesky Krumlov</td><td>1</td><td>Walking</td><td>CZK</td></tr>
+                <tr><td>Salzburg</td><td>2</td><td>Walking + Bus</td><td>Euro (EUR)</td></tr>
+                <tr><td>Innsbruck</td><td>1</td><td>Walking + Cable car</td><td>Euro (EUR)</td></tr>
+                <tr><td>Vienna</td><td>2</td><td>U-bahn/Tram</td><td>Euro (EUR)</td></tr>
+                <tr><td>Budapest</td><td>3</td><td>Metro/Walking</td><td>Hungarian Forint (HUF)</td></tr>
+            </table>
+
+            <hr>
+
+            <h2>Essential Apps</h2>
+            <ul>
+                <li><strong>IDOS</strong> - Czech train/bus schedules</li>
+                <li><strong>OBB</strong> - Austrian rail booking + tickets</li>
+                <li><strong>RegioJet</strong> - Booking + mobile tickets</li>
+                <li><strong>Google Maps</strong> - Walking directions, transit info</li>
+                <li><strong>Uber/Bolt</strong> - For airport transfers, lazy moments</li>
+                <li><strong>Splitwise</strong> - Split expenses with the group</li>
+            </ul>
+
+            <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, rgba(5, 150, 105, 0.1) 0%, rgba(8, 145, 178, 0.1) 100%); border: 2px solid #059669;">
+                <h3 style="margin-bottom: 1rem;">The Bottom Line</h3>
+                <p>Dropping the cars saves money, reduces stress, and lets you fully enjoy the nightlife. The trains between cities are comfortable and scenic. The only real trade-off is Bohemian Switzerland - but the organized tour is actually recommended by locals because guides know the trails and it includes the boat ride + lunch.</p>
+                <p style="margin-top: 1rem;"><strong>For a group focused on cities + nightlife + some nature, public transport is the smarter choice.</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>Central Europe Trip 2026 | <a href="itinerary-hybrid.html" style="color: white;">Compare with Car Version</a></p>
+    </footer>
+</body>
+</html>
