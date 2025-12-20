@@ -274,4 +274,96 @@ However, if your priorities lean heavily toward:
 
 ---
 
+## Vienna Start vs Prague Start Analysis
+
+### Route Logic
+
+**Current (Prague Start)**
+```
+Prague → Bohemian Switzerland → Český Krumlov → Salzburg → Vienna → Bratislava → Budapest → Prague
+```
+
+**Iter2 (Vienna Start)**
+```
+Vienna → Budapest → Prague → Český Krumlov → Salzburg → Innsbruck → Hallstatt → Vienna
+```
+
+### The Core Difference
+
+| Aspect | Prague Start | Vienna Start |
+|--------|--------------|--------------|
+| **Direction** | West → East → Return | East first → West → Return |
+| **Budapest Position** | Near end (Day 8-10) | Near start (Day 2-4) |
+| **Long Drive Timing** | Day 11 (recovery day) | Day 5 (mid-trip) |
+| **Backtracking** | Minimal | Budapest → Prague is a backtrack |
+
+### Day 1 Experience
+
+| Prague Start | Vienna Start |
+|--------------|--------------|
+| Land → Pick up cars → Explore Old Town | Land → Drive 245km OR rest (wasted day) |
+| Immediate immersion in nightlife city | Either exhausting drive or delayed start |
+
+### The Budapest Problem
+
+**Prague Start:**
+- Budapest is Days 8-10 (near end)
+- Arrive fresh, party hard for 2 nights
+- Long drive home (Day 11) is a recovery day anyway
+
+**Vienna Start:**
+- Budapest is Days 2-4 (at start)
+- Arrive jet-lagged from India
+- Party on jet lag = suboptimal
+- Long drive to Prague (Day 5) comes right after partying
+
+### Nightlife Optimization
+
+| City | Prague Start Position | Vienna Start Position |
+|------|----------------------|----------------------|
+| Prague | Day 2 (fresh, energized) | Day 6-7 (mid-trip) |
+| Budapest | Days 9-10 (peak energy, celebration) | Days 3-4 (jet-lagged) |
+| Vienna | Day 7 (good timing) | Day 1 (tired) or Day 15 (leaving) |
+
+**Winner: Prague Start** - Better nightlife sequencing
+
+### Nature/Scenic Comparison
+
+| Experience | Prague Start | Vienna Start |
+|------------|--------------|--------------|
+| Bohemian Switzerland | Day 3 (included) | Not included |
+| Alpine Scenery | Salzburg area only | Full Tyrolean Alps + Innsbruck |
+| Lakes | Hallstatt (brief) | Gosausee, Mondsee, Hallstatt |
+
+**Winner: Vienna Start** - Better Alpine coverage (but loses Bohemian Switzerland)
+
+### Summary: Prague Start vs Vienna Start
+
+| Category | Prague Start | Vienna Start | Winner |
+|----------|--------------|--------------|--------|
+| Flight Options | Good | Slightly better | Vienna |
+| Day 1 Experience | Great | Exhausting or slow | Prague |
+| Nightlife Timing | Optimal | Jet-lag party | Prague |
+| Budapest Experience | Fresh & energized | Jet-lagged | Prague |
+| Alpine Scenery | Limited | Excellent | Vienna |
+| Bohemian Switzerland | Included | Skipped | Prague |
+| Total Driving | ~1,400 km | ~1,820 km | Prague |
+| Buffer/Flex Days | 1-2 | 0-1 | Prague |
+| Route Efficiency | Minimal backtrack | Backtrack required | Prague |
+
+**Final Score: Prague Start wins 7-2**
+
+### Bottom Line
+
+Prague Start wins for a group (ages 25-27) seeking party + nature balance because:
+1. **Nightlife timing** - Party in Prague fresh (Day 2), Budapest at peak energy (Day 9-10)
+2. **Less driving** - 400km less total
+3. **Includes Bohemian Switzerland** - Unique, irreplaceable experience
+4. **Built-in flexibility** - Rest days when needed
+5. **No jet-lag partying** - Budapest ruin bars deserve full energy
+
+Vienna Start only wins if Alpine scenery is your #1 priority and you're willing to sacrifice nightlife quality.
+
+---
+
 *Report generated: December 2024*

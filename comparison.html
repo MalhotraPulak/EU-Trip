@@ -686,6 +686,169 @@
         .status-unchanged {
             color: var(--gray);
         }
+
+        /* Start city comparison section */
+        .start-city-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #2d4a6d 100%);
+            color: white;
+        }
+
+        .start-city-section h2 {
+            color: white;
+        }
+
+        .start-city-section h2::after {
+            background: var(--secondary);
+        }
+
+        .route-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .route-comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .route-box {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 1.5rem;
+        }
+
+        .route-box h4 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .route-box code {
+            display: block;
+            background: rgba(0,0,0,0.3);
+            padding: 1rem;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+
+        .vs-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .vs-table th,
+        .vs-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .vs-table th {
+            background: rgba(0,0,0,0.2);
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        .vs-table td:last-child {
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .vs-table .winner-prague {
+            color: #68d391;
+        }
+
+        .vs-table .winner-vienna {
+            color: var(--secondary);
+        }
+
+        .problem-box {
+            background: rgba(0,0,0,0.2);
+            border-left: 4px solid #fc8181;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .problem-box h4 {
+            color: #fc8181;
+            margin-bottom: 1rem;
+        }
+
+        .problem-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .problem-columns {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .problem-column h5 {
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .problem-column ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .problem-column li {
+            padding: 0.25rem 0;
+            opacity: 0.9;
+        }
+
+        .start-verdict {
+            background: rgba(104, 211, 145, 0.2);
+            border: 2px solid #68d391;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .start-verdict h3 {
+            color: #68d391;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .start-verdict-score {
+            font-size: 2rem;
+            font-family: 'Playfair Display', Georgia, serif;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .start-verdict ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            max-width: 500px;
+            margin: 1rem auto 0;
+        }
+
+        .start-verdict li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .start-verdict li::before {
+            content: "+";
+            position: absolute;
+            left: 0;
+            color: #68d391;
+            font-weight: 700;
+        }
     </style>
 </head>
 <body>
@@ -1075,6 +1238,127 @@
                         <td style="padding: 0.5rem 0; color: #dd6b20;">Still 6-7 driving days</td>
                     </tr>
                 </table>
+            </div>
+        </section>
+
+        <!-- Vienna vs Prague Start -->
+        <section class="section start-city-section">
+            <h2>Vienna Start vs Prague Start</h2>
+
+            <div class="route-comparison">
+                <div class="route-box">
+                    <h4>Prague Start (Current)</h4>
+                    <code>Prague → Bohemian Switzerland → Český Krumlov → Salzburg → Vienna → Bratislava → Budapest → Prague</code>
+                </div>
+                <div class="route-box">
+                    <h4>Vienna Start (Iter2)</h4>
+                    <code>Vienna → Budapest → Prague → Český Krumlov → Salzburg → Innsbruck → Hallstatt → Vienna</code>
+                </div>
+            </div>
+
+            <div class="table-wrapper">
+                <table class="vs-table">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Prague Start</th>
+                            <th>Vienna Start</th>
+                            <th>Winner</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Flight Options from India</td>
+                            <td>Good</td>
+                            <td>Slightly better</td>
+                            <td class="winner-vienna">Vienna</td>
+                        </tr>
+                        <tr>
+                            <td>Day 1 Experience</td>
+                            <td>Great - explore Old Town</td>
+                            <td>Exhausting drive or slow start</td>
+                            <td class="winner-prague">Prague</td>
+                        </tr>
+                        <tr>
+                            <td>Nightlife Timing</td>
+                            <td>Optimal sequencing</td>
+                            <td>Party on jet lag</td>
+                            <td class="winner-prague">Prague</td>
+                        </tr>
+                        <tr>
+                            <td>Budapest Experience</td>
+                            <td>Days 8-10 (fresh, energized)</td>
+                            <td>Days 2-4 (jet-lagged)</td>
+                            <td class="winner-prague">Prague</td>
+                        </tr>
+                        <tr>
+                            <td>Alpine Scenery</td>
+                            <td>Salzburg area only</td>
+                            <td>Full Tyrolean Alps + Innsbruck</td>
+                            <td class="winner-vienna">Vienna</td>
+                        </tr>
+                        <tr>
+                            <td>Bohemian Switzerland</td>
+                            <td>Included (Day 3)</td>
+                            <td>Skipped entirely</td>
+                            <td class="winner-prague">Prague</td>
+                        </tr>
+                        <tr>
+                            <td>Total Driving</td>
+                            <td>~1,400 km</td>
+                            <td>~1,820 km</td>
+                            <td class="winner-prague">Prague</td>
+                        </tr>
+                        <tr>
+                            <td>Buffer/Flex Days</td>
+                            <td>1-2 built in</td>
+                            <td>0-1 (needs surgery)</td>
+                            <td class="winner-prague">Prague</td>
+                        </tr>
+                        <tr>
+                            <td>Route Efficiency</td>
+                            <td>Minimal backtrack</td>
+                            <td>Budapest→Prague backtrack</td>
+                            <td class="winner-prague">Prague</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="problem-box">
+                <h4>The Budapest Problem</h4>
+                <div class="problem-columns">
+                    <div class="problem-column">
+                        <h5>Prague Start</h5>
+                        <ul>
+                            <li>Budapest is Days 8-10 (near end)</li>
+                            <li>Arrive fresh, party hard for 2 nights</li>
+                            <li>Long drive home is a recovery day</li>
+                            <li>"Party → Sleep in car → Chill" works</li>
+                        </ul>
+                    </div>
+                    <div class="problem-column">
+                        <h5>Vienna Start</h5>
+                        <ul>
+                            <li>Budapest is Days 2-4 (at start)</li>
+                            <li>Arrive jet-lagged from India</li>
+                            <li>Party on jet lag = suboptimal</li>
+                            <li>Long drive to Prague right after partying</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="start-verdict">
+                <h3>Prague Start Wins</h3>
+                <div class="start-verdict-score">7 - 2</div>
+                <ul>
+                    <li>Nightlife timing - Party fresh in Prague, peak energy in Budapest</li>
+                    <li>Less driving - 400km less total</li>
+                    <li>Includes Bohemian Switzerland - Unique, irreplaceable</li>
+                    <li>Built-in flexibility - Rest days when needed</li>
+                    <li>No jet-lag partying - Ruin bars deserve full energy</li>
+                </ul>
             </div>
         </section>
 
