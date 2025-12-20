@@ -849,6 +849,74 @@
             color: #68d391;
             font-weight: 700;
         }
+
+        /* Luggage section styles */
+        .luggage-section {
+            background: var(--light);
+            border-top: 3px solid var(--primary);
+        }
+
+        .luggage-summary-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .luggage-summary-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .luggage-summary-card {
+            background: white;
+            padding: 1.5rem;
+            text-align: center;
+            border: 2px solid var(--border);
+        }
+
+        .luggage-summary-card h4 {
+            margin: 0 0 0.75rem 0;
+            font-size: 1rem;
+        }
+
+        .luggage-summary-card .fit-status {
+            font-size: 1.25rem;
+            font-weight: 700;
+            font-family: 'Playfair Display', Georgia, serif;
+            margin-bottom: 0.5rem;
+        }
+
+        .luggage-summary-card p {
+            margin: 0;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .luggage-summary-card.fit-yes {
+            border-color: var(--success);
+        }
+
+        .luggage-summary-card.fit-yes .fit-status {
+            color: var(--success);
+        }
+
+        .luggage-summary-card.fit-tight {
+            border-color: #d69e2e;
+        }
+
+        .luggage-summary-card.fit-tight .fit-status {
+            color: #d69e2e;
+        }
+
+        .luggage-summary-card.fit-no {
+            border-color: #c53030;
+        }
+
+        .luggage-summary-card.fit-no .fit-status {
+            color: #c53030;
+        }
     </style>
 </head>
 <body>
@@ -870,7 +938,10 @@
         <h1>Itinerary Comparison</h1>
         <p>A detailed analysis of both itinerary options across cost, activities, scenery, nightlife, and more</p>
         <div class="vs-badge">Current vs Gemini</div>
-        <a href="map-comparison.html" style="display: inline-block; margin-top: 1.5rem; background: white; color: var(--primary); padding: 0.75rem 1.5rem; text-decoration: none; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; font-size: 0.9rem;">View Route Map Comparison</a>
+        <div style="margin-top: 1.5rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <a href="map-comparison.html" style="display: inline-block; background: white; color: var(--primary); padding: 0.75rem 1.5rem; text-decoration: none; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; font-size: 0.9rem;">View Route Map</a>
+            <a href="#luggage" style="display: inline-block; background: var(--secondary); color: var(--primary); padding: 0.75rem 1.5rem; text-decoration: none; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; font-size: 0.9rem;">5 vs 6 People & Cars</a>
+        </div>
     </header>
 
     <div class="winner-banner">
@@ -1613,6 +1684,220 @@
                         </tr>
                     </tbody>
                 </table>
+            </div>
+        </section>
+
+        <!-- Luggage & Car Capacity -->
+        <section id="luggage" class="section luggage-section">
+            <h2>Luggage & Car Capacity: 5 vs 6 People</h2>
+            <p style="margin-bottom: 2rem; color: var(--gray);">Can you fit everyone's luggage in 2 cars? Does the alpine route require more gear?</p>
+
+            <!-- Quick Answer -->
+            <div class="luggage-summary-grid">
+                <div class="luggage-summary-card fit-yes">
+                    <h4>5 People - Either Route</h4>
+                    <div class="fit-status">Fits Comfortably</div>
+                    <p>2 compact sedans work fine</p>
+                </div>
+                <div class="luggage-summary-card fit-tight">
+                    <h4>6 People - Claude Route</h4>
+                    <div class="fit-status">Tight but Works</div>
+                    <p>Backpacks may go on seats</p>
+                </div>
+                <div class="luggage-summary-card fit-no">
+                    <h4>6 People - Gemini (Alpine)</h4>
+                    <div class="fit-status">Won't Fit</div>
+                    <p>Must upgrade to SUVs or van</p>
+                </div>
+            </div>
+
+            <!-- Alpine Gear Impact -->
+            <div style="background: white; border: 1px solid var(--border); padding: 2rem; margin: 2rem 0;">
+                <h3 style="margin-bottom: 1rem; color: var(--primary);">Does Alpine Area Add More Luggage?</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <div>
+                        <h4 style="color: var(--success); margin-bottom: 0.5rem;">Claude Route (Cities)</h4>
+                        <p style="color: var(--gray); font-size: 0.9rem;">Prague, Vienna, Budapest - April temps 10-18°C. Standard spring layers sufficient.</p>
+                        <div style="margin-top: 1rem; padding: 1rem; background: var(--light);">
+                            <strong>Luggage per person:</strong> ~120L
+                        </div>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">Gemini Route (Alpine)</h4>
+                        <p style="color: var(--gray); font-size: 0.9rem;">Innsbruck, Nordkette (2,334m) - April temps -2°C to 12°C. Need warm jacket, hiking boots, layers.</p>
+                        <div style="margin-top: 1rem; padding: 1rem; background: #fef3c7;">
+                            <strong>Luggage per person:</strong> ~143L (+19%)
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top: 1.5rem; padding: 1rem; background: #fff5f5; border-left: 4px solid #c53030;">
+                    <strong style="color: #c53030;">Alpine adds ~23L per person:</strong> insulated jacket, hiking boots, base layers, rain shell, hat & gloves
+                </div>
+            </div>
+
+            <!-- Car Rental Prices -->
+            <h3 style="margin: 2rem 0 1rem;">Car Rental Prices (15 days, April 2026)</h3>
+
+            <div class="table-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Car Type</th>
+                            <th>Prague (PRG)</th>
+                            <th>Vienna (VIE)</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="category">2x Compact Sedan</td>
+                            <td>€360-840</td>
+                            <td class="winner-cell">€240-690</td>
+                            <td>VW Golf, Skoda Octavia</td>
+                        </tr>
+                        <tr>
+                            <td class="category">2x SUV/Wagon</td>
+                            <td class="winner-cell">€1,050-1,650</td>
+                            <td>€1,440-2,100</td>
+                            <td>Skoda Superb, Ford Kuga</td>
+                        </tr>
+                        <tr>
+                            <td class="category">1x 9-Seater Van</td>
+                            <td class="winner-cell">€1,050-1,500</td>
+                            <td>€1,200-1,650</td>
+                            <td>VW Caravelle/Transporter</td>
+                        </tr>
+                        <tr>
+                            <td class="category">1x 7-Seater + Compact</td>
+                            <td>€1,100-1,700</td>
+                            <td>€1,100-1,700</td>
+                            <td>Best flexibility</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0;">
+                <div style="padding: 1rem; background: #f0fff4; border: 1px solid #9ae6b4;">
+                    <strong style="color: var(--success);">Vienna wins for compacts</strong><br>
+                    <span style="font-size: 0.9rem; color: var(--gray);">April is their cheapest month (avg €23/day)</span>
+                </div>
+                <div style="padding: 1rem; background: #fff5f5; border: 1px solid #feb2b2;">
+                    <strong style="color: #c53030;">Prague wins for larger vehicles</strong><br>
+                    <span style="font-size: 0.9rem; color: var(--gray);">SUVs/vans are €200-400 cheaper</span>
+                </div>
+            </div>
+
+            <!-- Per Person Cost Comparison -->
+            <h3 style="margin: 2rem 0 1rem;">Cost Per Person (6 People)</h3>
+
+            <div class="table-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Configuration</th>
+                            <th>Prague Start</th>
+                            <th>Vienna Start</th>
+                            <th>Fits 6 + Luggage?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="category">2x Compact Sedan</td>
+                            <td>₹7,500-12,500</td>
+                            <td class="winner-cell">₹5,200-10,300</td>
+                            <td>Claude: Tight | Gemini: <span style="color: #c53030; font-weight: 600;">NO</span></td>
+                        </tr>
+                        <tr>
+                            <td class="category">2x SUV/Wagon</td>
+                            <td class="winner-cell">₹15,700-24,700</td>
+                            <td>₹21,600-31,500</td>
+                            <td style="color: var(--success); font-weight: 600;">YES - Comfortable</td>
+                        </tr>
+                        <tr>
+                            <td class="category">1x 9-Seater Van</td>
+                            <td class="winner-cell">₹15,700-22,500</td>
+                            <td>₹18,000-24,700</td>
+                            <td style="color: var(--success); font-weight: 600;">YES - Plenty</td>
+                        </tr>
+                        <tr>
+                            <td class="category">1x 7-Seater + Compact</td>
+                            <td>₹16,500-25,500</td>
+                            <td>₹16,500-25,500</td>
+                            <td style="color: var(--success); font-weight: 600;">YES - Best flexibility</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- One Big Car Option -->
+            <div style="background: var(--primary); color: white; padding: 2rem; margin: 2rem 0;">
+                <h3 style="color: white; margin-bottom: 1rem;">One Big Car Option (6 People)</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem;">
+                    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem;">
+                        <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">Pros</h4>
+                        <ul style="list-style: none; padding: 0; font-size: 0.9rem;">
+                            <li style="padding: 0.25rem 0;">+ Everyone travels together</li>
+                            <li style="padding: 0.25rem 0;">+ One parking spot</li>
+                            <li style="padding: 0.25rem 0;">+ One fuel tank, one GPS</li>
+                            <li style="padding: 0.25rem 0;">+ 1,200L luggage space</li>
+                        </ul>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem;">
+                        <h4 style="color: #fc8181; margin-bottom: 0.5rem;">Cons</h4>
+                        <ul style="list-style: none; padding: 0; font-size: 0.9rem;">
+                            <li style="padding: 0.25rem 0;">- Single point of failure</li>
+                            <li style="padding: 0.25rem 0;">- One driver at a time</li>
+                            <li style="padding: 0.25rem 0;">- Hard to park in old towns</li>
+                            <li style="padding: 0.25rem 0;">- Can't split up group</li>
+                        </ul>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem;">
+                        <h4 style="color: #68d391; margin-bottom: 0.5rem;">Verdict</h4>
+                        <p style="font-size: 0.9rem; margin-bottom: 1rem;">For 6 people on Alpine route, <strong>1 van costs the same as 2 SUVs</strong> but gives 3x the luggage space.</p>
+                        <div style="background: var(--secondary); color: var(--primary); padding: 0.5rem; text-align: center; font-weight: 600;">
+                            Recommended: VW Caravelle
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Final Luggage Recommendations -->
+            <div style="background: white; border: 2px solid var(--success); padding: 2rem;">
+                <h3 style="color: var(--success); margin-bottom: 1.5rem;">Recommendation by Scenario</h3>
+                <div class="table-wrapper">
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr style="background: var(--success); color: white;">
+                                <th style="padding: 1rem; text-align: left;">Scenario</th>
+                                <th style="padding: 1rem; text-align: left;">Best Option</th>
+                                <th style="padding: 1rem; text-align: left;">Cost/Person</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom: 1px solid var(--border);">
+                                <td style="padding: 1rem;"><strong>5 People - Either Route</strong></td>
+                                <td style="padding: 1rem;">2x Compact Sedan (Vienna)</td>
+                                <td style="padding: 1rem;">₹4,300-12,400</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border);">
+                                <td style="padding: 1rem;"><strong>6 People - Claude Route</strong></td>
+                                <td style="padding: 1rem;">2x Compact Sedan (Vienna)</td>
+                                <td style="padding: 1rem;">₹5,200-10,300</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border);">
+                                <td style="padding: 1rem;"><strong>6 People - Gemini (Alpine)</strong></td>
+                                <td style="padding: 1rem;">1x 9-Seater Van (Prague)</td>
+                                <td style="padding: 1rem;">₹15,700-22,500</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 1rem;"><strong>6 People - Maximum Flexibility</strong></td>
+                                <td style="padding: 1rem;">1x 7-Seater + 1x Compact</td>
+                                <td style="padding: 1rem;">₹16,500-25,500</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </section>
 
