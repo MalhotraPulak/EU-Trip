@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Itinerary Comparison - EU Trip 2026</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* Comparison-specific styles */
+        .comparison-hero {
+            background: var(--gradient);
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            color: white;
+        }
+
+        .comparison-hero h1 {
+            color: white;
+            font-size: 2.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .comparison-hero p {
+            opacity: 0.9;
+            font-size: 1.125rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .vs-badge {
+            display: inline-block;
+            background: var(--secondary);
+            color: var(--primary);
+            padding: 0.5rem 1.5rem;
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin: 2rem 0;
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+
+        /* Winner banner */
+        .winner-banner {
+            background: var(--success);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .winner-banner h2 {
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .winner-banner h2::after {
+            display: none;
+        }
+
+        .winner-score {
+            font-size: 2.5rem;
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 700;
+        }
+
+        /* Executive summary cards */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .summary-card {
+            background: white;
+            border: 2px solid var(--border);
+            padding: 2rem;
+        }
+
+        .summary-card.current {
+            border-color: var(--success);
+        }
+
+        .summary-card.iter2 {
+            border-color: var(--secondary);
+        }
+
+        .summary-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .summary-card h3 {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        .summary-card .badge {
+            padding: 0.25rem 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .badge.winner {
+            background: var(--success);
+            color: white;
+        }
+
+        .badge.alternative {
+            background: var(--light);
+            color: var(--gray);
+            border: 1px solid var(--border);
+        }
+
+        .summary-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .summary-card li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--gray);
+        }
+
+        .summary-card li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+        }
+
+        .summary-card.current li::before {
+            content: "+";
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        .summary-card.iter2 li::before {
+            content: "+";
+            color: var(--secondary);
+            font-weight: 700;
+        }
+
+        /* Comparison table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: white;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem 1.25rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .comparison-table thead th {
+            background: var(--primary);
+            color: white;
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 700;
+        }
+
+        .comparison-table thead th:first-child {
+            text-align: left;
+        }
+
+        .comparison-table thead th:not(:first-child) {
+            text-align: center;
+        }
+
+        .comparison-table tbody td:not(:first-child) {
+            text-align: center;
+        }
+
+        .comparison-table tbody tr:hover {
+            background: var(--light);
+        }
+
+        .comparison-table .category {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .comparison-table .winner-cell {
+            background: rgba(45, 90, 61, 0.1);
+            font-weight: 600;
+            color: var(--success);
+        }
+
+        /* Score bars */
+        .score-bar-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .score-bar {
+            height: 8px;
+            background: var(--gray-light);
+            flex: 1;
+            max-width: 100px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .score-bar-fill {
+            height: 100%;
+            border-radius: 4px;
+        }
+
+        .score-bar-fill.current {
+            background: var(--success);
+        }
+
+        .score-bar-fill.iter2 {
+            background: var(--secondary);
+        }
+
+        .score-value {
+            font-weight: 600;
+            min-width: 40px;
+        }
+
+        /* Category breakdown cards */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .category-card {
+            background: white;
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .category-card-header {
+            background: var(--primary);
+            color: white;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .category-card-header h4 {
+            color: white;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .category-winner {
+            background: var(--secondary);
+            color: var(--primary);
+            padding: 0.25rem 0.75rem;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .category-card-body {
+            padding: 1.5rem;
+        }
+
+        .category-scores {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .category-score {
+            text-align: center;
+        }
+
+        .category-score .label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gray);
+            margin-bottom: 0.25rem;
+        }
+
+        .category-score .value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+
+        .category-score .value.current {
+            color: var(--success);
+        }
+
+        .category-score .value.iter2 {
+            color: var(--secondary);
+        }
+
+        .category-details p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Tradeoffs section */
+        .tradeoffs-section {
+            background: var(--light);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tradeoff-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .tradeoff-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .tradeoff-card {
+            background: white;
+            padding: 2rem;
+            border: 1px solid var(--border);
+        }
+
+        .tradeoff-card h3 {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--secondary);
+        }
+
+        .tradeoff-card h3.current {
+            border-color: var(--success);
+        }
+
+        .tradeoff-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .tradeoff-card li {
+            padding: 0.75rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            border-bottom: 1px solid var(--light);
+        }
+
+        .tradeoff-card li:last-child {
+            border-bottom: none;
+        }
+
+        .tradeoff-card li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.75rem;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .tradeoff-card.current li::before {
+            background: var(--success);
+        }
+
+        .tradeoff-card.iter2 li::before {
+            background: var(--secondary);
+        }
+
+        /* Hybrid recommendation */
+        .hybrid-section {
+            background: var(--primary);
+            color: white;
+        }
+
+        .hybrid-section h2 {
+            color: white;
+        }
+
+        .hybrid-section h2::after {
+            background: var(--secondary);
+        }
+
+        .hybrid-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hybrid-route {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1.5rem;
+            font-family: monospace;
+            font-size: 0.9rem;
+            line-height: 1.8;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .hybrid-benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .hybrid-benefit {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .hybrid-benefit::before {
+            content: "+";
+            color: var(--secondary);
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+
+        /* Final verdict */
+        .verdict-section {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .verdict-box {
+            background: white;
+            border: 3px solid var(--success);
+            padding: 3rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .verdict-box h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--success);
+        }
+
+        .verdict-box p {
+            color: var(--gray);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .verdict-note {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive table wrapper */
+        .table-wrapper {
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <span class="nav-icon">CE</span>
+            <a href="index.html">EU Trip 2026</a>
+            <span class="nav-divider">|</span>
+            <span>Comparison</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="map.html">Map</a>
+            <a href="docs/itinerary.html">Itinerary</a>
+        </div>
+    </nav>
+
+    <header class="comparison-hero">
+        <h1>Itinerary Comparison</h1>
+        <p>A detailed analysis of both itinerary options across cost, activities, scenery, nightlife, and more</p>
+        <div class="vs-badge">Current vs Iter2</div>
+    </header>
+
+    <div class="winner-banner">
+        <h2>Overall Winner</h2>
+        <div class="winner-score">Current Itinerary: 65/80 vs Iter2: 50/80</div>
+        <p>Best balance of nightlife, nature, and flexibility for young travelers</p>
+    </div>
+
+    <main class="container">
+        <!-- Executive Summary -->
+        <section class="section">
+            <h2>Executive Summary</h2>
+
+            <div class="table-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Aspect</th>
+                            <th>Current Itinerary</th>
+                            <th>Iter2 (Alpine Loop)</th>
+                            <th>Winner</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="category">Starting City</td>
+                            <td>Prague</td>
+                            <td>Vienna</td>
+                            <td class="winner-cell">Current</td>
+                        </tr>
+                        <tr>
+                            <td class="category">Duration</td>
+                            <td>14-15 days</td>
+                            <td>16 days</td>
+                            <td>Iter2</td>
+                        </tr>
+                        <tr>
+                            <td class="category">Total Distance</td>
+                            <td>~1,400 km</td>
+                            <td>~2,070 km</td>
+                            <td class="winner-cell">Current</td>
+                        </tr>
+                        <tr>
+                            <td class="category">Budget/Person</td>
+                            <td>1.8L - 2.5L</td>
+                            <td>1.6L - 1.8L</td>
+                            <td>Iter2</td>
+                        </tr>
+                        <tr>
+                            <td class="category">Countries</td>
+                            <td>5 (CZ, DE, AT, SK, HU)</td>
+                            <td>4 (AT, HU, CZ, DE)</td>
+                            <td class="winner-cell">Current</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="summary-grid">
+                <div class="summary-card current">
+                    <div class="summary-card-header">
+                        <h3>Current Itinerary</h3>
+                        <span class="badge winner">Winner</span>
+                    </div>
+                    <ul>
+                        <li>Prague as home base (best nightlife start)</li>
+                        <li>Bohemian Switzerland hiking day</li>
+                        <li>Comprehensive ruin bar guide</li>
+                        <li>Built-in rest and flexible days</li>
+                        <li>Dresden day trip option</li>
+                        <li>Bratislava bonus stop</li>
+                    </ul>
+                </div>
+                <div class="summary-card iter2">
+                    <div class="summary-card-header">
+                        <h3>Iter2 (Alpine Loop)</h3>
+                        <span class="badge alternative">Alternative</span>
+                    </div>
+                    <ul>
+                        <li>Innsbruck & Tyrolean Alps included</li>
+                        <li>Best Alpine driving routes</li>
+                        <li>Lower budget achievable (1.6L)</li>
+                        <li>Gosausee & Mondsee lake stops</li>
+                        <li>Border town accommodation savings</li>
+                        <li>Kitzbuhel scenic village</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Category Breakdown -->
+        <section class="section">
+            <h2>Category Breakdown</h2>
+
+            <div class="category-grid">
+                <!-- Cost -->
+                <div class="category-card">
+                    <div class="category-card-header">
+                        <h4>Cost</h4>
+                        <span class="category-winner">Iter2 Wins</span>
+                    </div>
+                    <div class="category-card-body">
+                        <div class="category-scores">
+                            <div class="category-score">
+                                <div class="label">Current</div>
+                                <div class="value current">7/10</div>
+                            </div>
+                            <div class="category-score">
+                                <div class="label">Iter2</div>
+                                <div class="value iter2">8/10</div>
+                            </div>
+                        </div>
+                        <div class="category-details">
+                            <p>Iter2 achieves lower costs through border town stays (Freilassing instead of Salzburg) and explicit budget tips like carrying Indian ready-to-eat packets. Current offers more flexible budget tiers.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activities -->
+                <div class="category-card">
+                    <div class="category-card-header">
+                        <h4>Activities</h4>
+                        <span class="category-winner">Current Wins</span>
+                    </div>
+                    <div class="category-card-body">
+                        <div class="category-scores">
+                            <div class="category-score">
+                                <div class="label">Current</div>
+                                <div class="value current">8/10</div>
+                            </div>
+                            <div class="category-score">
+                                <div class="label">Iter2</div>
+                                <div class="value iter2">7/10</div>
+                            </div>
+                        </div>
+                        <div class="category-details">
+                            <p>Current includes unique experiences like Bohemian Switzerland, Dresden museums, Karlovy Lazne club, and Kutna Hora bone church. Iter2 focuses more on scenic viewing than active participation.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chill Factor -->
+                <div class="category-card">
+                    <div class="category-card-header">
+                        <h4>Chill Factor</h4>
+                        <span class="category-winner">Current Wins</span>
+                    </div>
+                    <div class="category-card-body">
+                        <div class="category-scores">
+                            <div class="category-score">
+                                <div class="label">Current</div>
+                                <div class="value current">8/10</div>
+                            </div>
+                            <div class="category-score">
+                                <div class="label">Iter2</div>
+                                <div class="value iter2">5/10</div>
+                            </div>
+                        </div>
+                        <div class="category-details">
+                            <p>Current has 1-2 flexible/rest days and a recovery day built in. Iter2 has back-to-back driving days with minimal downtime. Average driving: Current 1.5-2 hrs/day vs Iter2 2.5-3 hrs/day.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scenic Beauty -->
+                <div class="category-card">
+                    <div class="category-card-header">
+                        <h4>Scenic Beauty</h4>
+                        <span class="category-winner">Iter2 Wins</span>
+                    </div>
+                    <div class="category-card-body">
+                        <div class="category-scores">
+                            <div class="category-score">
+                                <div class="label">Current</div>
+                                <div class="value current">7/10</div>
+                            </div>
+                            <div class="category-score">
+                                <div class="label">Iter2</div>
+                                <div class="value iter2">9/10</div>
+                            </div>
+                        </div>
+                        <div class="category-details">
+                            <p>Iter2 excels with Tyrolean Alps, Road 178 alpine route, Gosausee lake, and mountain village exposure. Current is stronger on forests and sandstone formations but weaker on classic Alpine scenery.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nature & Outdoors -->
+                <div class="category-card">
+                    <div class="category-card-header">
+                        <h4>Nature & Outdoors</h4>
+                        <span class="category-winner">Current Wins</span>
+                    </div>
+                    <div class="category-card-body">
+                        <div class="category-scores">
+                            <div class="category-score">
+                                <div class="label">Current</div>
+                                <div class="value current">9/10</div>
+                            </div>
+                            <div class="category-score">
+                                <div class="label">Iter2</div>
+                                <div class="value iter2">6/10</div>
+                            </div>
+                        </div>
+                        <div class="category-details">
+                            <p>Current has dedicated nature programming: Bohemian Switzerland hiking, Kamenice Gorge boat rides, Vltava rafting, detailed thermal baths guide. Iter2 offers scenic views from the car but fewer immersive experiences.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hiking -->
+                <div class="category-card">
+                    <div class="category-card-header">
+                        <h4>Hiking</h4>
+                        <span class="category-winner">Current Wins</span>
+                    </div>
+                    <div class="category-card-body">
+                        <div class="category-scores">
+                            <div class="category-score">
+                                <div class="label">Current</div>
+                                <div class="value current">8/10</div>
+                            </div>
+                            <div class="category-score">
+                                <div class="label">Iter2</div>
+                                <div class="value iter2">4/10</div>
+                            </div>
+                        </div>
+                        <div class="category-details">
+                            <p>Current offers Pravcicka Brana hike (2-3 hrs), Petrin Hill, Bastei Bridge option, and detailed trail instructions. Iter2 relies mostly on cable cars and viewpoint visits with minimal actual hiking.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nightlife -->
+                <div class="category-card">
+                    <div class="category-card-header">
+                        <h4>Nightlife</h4>
+                        <span class="category-winner">Current Wins</span>
+                    </div>
+                    <div class="category-card-body">
+                        <div class="category-scores">
+                            <div class="category-score">
+                                <div class="label">Current</div>
+                                <div class="value current">10/10</div>
+                            </div>
+                            <div class="category-score">
+                                <div class="label">Iter2</div>
+                                <div class="value iter2">4/10</div>
+                            </div>
+                        </div>
+                        <div class="category-details">
+                            <p>Current is party-optimized: Karlovy Lazne (5-floor megaclub), Cross Club, Pratersauna, complete ruin bar crawl guide, SPARTY pool party. Iter2 briefly mentions ruin bars with no venue details.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- City Variety -->
+                <div class="category-card">
+                    <div class="category-card-header">
+                        <h4>City Variety</h4>
+                        <span class="category-winner">Current Wins</span>
+                    </div>
+                    <div class="category-card-body">
+                        <div class="category-scores">
+                            <div class="category-score">
+                                <div class="label">Current</div>
+                                <div class="value current">8/10</div>
+                            </div>
+                            <div class="category-score">
+                                <div class="label">Iter2</div>
+                                <div class="value iter2">7/10</div>
+                            </div>
+                        </div>
+                        <div class="category-details">
+                            <p>Current covers 5 countries with Bratislava and Dresden bonuses. Iter2 adds Innsbruck and Tyrolean villages but skips Slovakia entirely. Current has Prague as extended home base (4-5 nights).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cost Comparison Table -->
+        <section class="section" style="background: white; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin: 0 -2rem; padding-left: 2rem; padding-right: 2rem;">
+            <h2>Detailed Cost Comparison</h2>
+
+            <div class="table-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Current Itinerary</th>
+                            <th>Iter2</th>
+                            <th>Difference</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="category">Flights</td>
+                            <td>45,000 - 65,000</td>
+                            <td>55,000</td>
+                            <td>Similar</td>
+                        </tr>
+                        <tr>
+                            <td class="category">Car Rental</td>
+                            <td>20,000 - 28,000</td>
+                            <td>15,000</td>
+                            <td class="winner-cell">Iter2 -5,000 to -13,000</td>
+                        </tr>
+                        <tr>
+                            <td class="category">Fuel/Tolls</td>
+                            <td>~5,000</td>
+                            <td>12,000</td>
+                            <td class="winner-cell">Current -7,000</td>
+                        </tr>
+                        <tr>
+                            <td class="category">Accommodation</td>
+                            <td>25,000 - 40,000</td>
+                            <td>45,000</td>
+                            <td class="winner-cell">Current -5,000 to -20,000</td>
+                        </tr>
+                        <tr>
+                            <td class="category">Food & Drink</td>
+                            <td>25,000 - 40,000</td>
+                            <td>35,000</td>
+                            <td>Similar</td>
+                        </tr>
+                        <tr>
+                            <td class="category">Activities</td>
+                            <td>10,000 - 18,000</td>
+                            <td>18,000</td>
+                            <td class="winner-cell">Current 0 to -8,000</td>
+                        </tr>
+                        <tr style="background: var(--light); font-weight: 600;">
+                            <td class="category">TOTAL</td>
+                            <td>1,80,000 - 2,50,000</td>
+                            <td>1,80,000</td>
+                            <td>Iter2 slightly cheaper</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Tradeoffs -->
+        <section class="section tradeoffs-section">
+            <h2>Key Trade-offs</h2>
+
+            <div class="tradeoff-cards">
+                <div class="tradeoff-card current">
+                    <h3 class="current">Choose Current If You Want...</h3>
+                    <ul>
+                        <li>Legendary nightlife (Prague megaclubs, Budapest ruin bars)</li>
+                        <li>Dedicated nature/hiking days (Bohemian Switzerland)</li>
+                        <li>Built-in rest and flexible days</li>
+                        <li>More city variety (5 countries vs 4)</li>
+                        <li>Party-focused trip with balance</li>
+                        <li>Detailed activity planning and guides</li>
+                        <li>Less daily driving (1.5-2 hrs avg)</li>
+                    </ul>
+                </div>
+                <div class="tradeoff-card iter2">
+                    <h3>Choose Iter2 If You Want...</h3>
+                    <ul>
+                        <li>Best Alpine scenery (Innsbruck, Tyrolean villages)</li>
+                        <li>Lower budget (1.6L achievable with cooking tips)</li>
+                        <li>Picturesque mountain driving routes</li>
+                        <li>More Austria exposure</li>
+                        <li>Lake-focused experience (Gosausee, Mondsee)</li>
+                        <li>Imperial/Habsburg history corridor</li>
+                        <li>Photography-optimized scenic stops</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hybrid Recommendation -->
+        <section class="section hybrid-section">
+            <h2>Hybrid Recommendation</h2>
+
+            <div class="hybrid-card">
+                <p style="margin-bottom: 1rem;">Get the best of both worlds by combining the strengths of each itinerary:</p>
+
+                <div class="hybrid-route">
+                    Prague (3 nights) --> Bohemian Switzerland --> Cesky Krumlov (1 night) -->
+                    Salzburg/Freilassing (1 night) --> Innsbruck area (2 nights) -->
+                    Gosausee --> Hallstatt --> Vienna (2 nights) --> Bratislava -->
+                    Budapest (3 nights) --> Prague (1 night) --> Departure
+                </div>
+
+                <div class="hybrid-benefits">
+                    <div class="hybrid-benefit">Alpine experience of Iter2</div>
+                    <div class="hybrid-benefit">Nightlife of Current</div>
+                    <div class="hybrid-benefit">Nature days intact</div>
+                    <div class="hybrid-benefit">Budget savings from border towns</div>
+                    <div class="hybrid-benefit">Best scenic routes from both</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Verdict -->
+        <section class="section verdict-section">
+            <h2>Final Verdict</h2>
+
+            <div class="verdict-box">
+                <h3>Current Itinerary Wins 65-50</h3>
+                <p>For a group of young travelers (25-27) seeking a balanced trip of nature, culture, AND nightlife, the Current Itinerary delivers the best overall experience.</p>
+
+                <div class="verdict-note">
+                    <strong>However, if your priorities lean heavily toward:</strong><br>
+                    Pure scenery/photography --> Go with Iter2<br>
+                    Tighter budget --> Go with Iter2<br>
+                    Party + Nature balance --> Stick with Current
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="section cta-section">
+            <h2>Ready to Decide?</h2>
+            <p>Explore both itineraries in detail</p>
+            <div class="cta-buttons">
+                <a href="docs/itinerary.html" class="btn btn-primary">View Current Itinerary</a>
+                <a href="index.html" class="btn btn-secondary">Back to Home</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>Central Europe Road Trip 2026</p>
+        <p class="footer-note">Itinerary Comparison Report | December 2024</p>
+    </footer>
+</body>
+</html>
