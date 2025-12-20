@@ -480,6 +480,212 @@
         .table-wrapper {
             overflow-x: auto;
         }
+
+        /* Red flags section */
+        .red-flags-section {
+            background: #fff5f5;
+            border-top: 3px solid #c53030;
+        }
+
+        .red-flags-section h2::after {
+            background: #c53030;
+        }
+
+        .red-flag-card {
+            background: white;
+            border: 1px solid #feb2b2;
+            border-left: 4px solid #c53030;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .red-flag-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .red-flag-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .red-flag-header h4 {
+            margin: 0;
+            color: #c53030;
+            font-size: 1rem;
+        }
+
+        .severity-badge {
+            padding: 0.25rem 0.75rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 2px;
+        }
+
+        .severity-high {
+            background: #c53030;
+            color: white;
+        }
+
+        .severity-medium {
+            background: #dd6b20;
+            color: white;
+        }
+
+        .severity-low {
+            background: #d69e2e;
+            color: white;
+        }
+
+        .red-flag-card p {
+            color: var(--gray);
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        /* Surgical fixes section */
+        .surgical-section {
+            background: #f0fff4;
+            border-top: 3px solid var(--success);
+        }
+
+        .surgical-section h2::after {
+            background: var(--success);
+        }
+
+        .surgery-card {
+            background: white;
+            border: 1px solid #9ae6b4;
+            margin-bottom: 1.5rem;
+        }
+
+        .surgery-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .surgery-header {
+            background: var(--success);
+            color: white;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .surgery-header h4 {
+            color: white;
+            margin: 0;
+        }
+
+        .surgery-number {
+            background: rgba(255,255,255,0.2);
+            padding: 0.25rem 0.75rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .surgery-body {
+            padding: 1.5rem;
+        }
+
+        .surgery-comparison {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 600px) {
+            .surgery-comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .surgery-before, .surgery-after {
+            padding: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .surgery-before {
+            background: #fff5f5;
+            border-left: 3px solid #c53030;
+        }
+
+        .surgery-after {
+            background: #f0fff4;
+            border-left: 3px solid var(--success);
+        }
+
+        .surgery-arrow {
+            font-size: 1.5rem;
+            color: var(--gray);
+        }
+
+        .surgery-note {
+            background: var(--light);
+            padding: 1rem;
+            font-size: 0.85rem;
+            color: var(--gray);
+            border-left: 3px solid var(--secondary);
+        }
+
+        /* Fixed itinerary table */
+        .fixed-itinerary {
+            background: white;
+            border: 2px solid var(--success);
+            margin-top: 2rem;
+        }
+
+        .fixed-itinerary-header {
+            background: var(--success);
+            color: white;
+            padding: 1rem 1.5rem;
+            text-align: center;
+        }
+
+        .fixed-itinerary-header h3 {
+            color: white;
+            margin: 0;
+        }
+
+        .fixed-itinerary-body {
+            padding: 1.5rem;
+        }
+
+        .fixed-itinerary table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        .fixed-itinerary th,
+        .fixed-itinerary td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .fixed-itinerary th {
+            background: var(--light);
+            font-weight: 600;
+        }
+
+        .fixed-itinerary tr:hover {
+            background: #f0fff4;
+        }
+
+        .status-fixed {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .status-unchanged {
+            color: var(--gray);
+        }
     </style>
 </head>
 <body>
@@ -588,6 +794,287 @@
                         <li>Kitzbuhel scenic village</li>
                     </ul>
                 </div>
+            </div>
+        </section>
+
+        <!-- Iter2 Red Flags -->
+        <section class="section red-flags-section">
+            <h2>Iter2 Red Flags</h2>
+            <p style="margin-bottom: 2rem; color: var(--gray);">Critical issues with Iter2 that need to be addressed before it can work for your April 11-25 dates:</p>
+
+            <div class="red-flag-card">
+                <div class="red-flag-header">
+                    <h4>Day 1 Exhaustion Risk</h4>
+                    <span class="severity-badge severity-high">High</span>
+                </div>
+                <p>Iter2 assumes you land in Vienna and immediately drive 245km to Budapest the same day. After an overnight flight from India, this is brutal and unsafe.</p>
+            </div>
+
+            <div class="red-flag-card">
+                <div class="red-flag-header">
+                    <h4>Duration Mismatch</h4>
+                    <span class="severity-badge severity-medium">Medium</span>
+                </div>
+                <p>Iter2 is designed for 16 days (Apr 10-25), but you only have 15 days on ground (Apr 11-25). You need to cut 1 night from somewhere.</p>
+            </div>
+
+            <div class="red-flag-card">
+                <div class="red-flag-header">
+                    <h4>No Buffer Days</h4>
+                    <span class="severity-badge severity-medium">Medium</span>
+                </div>
+                <p>Zero flexibility in the schedule. If weather is bad for Hallstatt/Nordkette, someone gets sick, or you want to extend a city you love - there's no slack.</p>
+            </div>
+
+            <div class="red-flag-card">
+                <div class="red-flag-header">
+                    <h4>Budapest to Prague (525km)</h4>
+                    <span class="severity-badge severity-medium">Medium</span>
+                </div>
+                <p>This is a 5.5-hour drive after only 2.5 days in Budapest. Feels rushed and tiring.</p>
+            </div>
+
+            <div class="red-flag-card">
+                <div class="red-flag-header">
+                    <h4>Heavy Driving Schedule</h4>
+                    <span class="severity-badge severity-low">Low</span>
+                </div>
+                <p>7 significant driving days out of 15. Average 2.5-3 hours daily driving compared to Current's 1.5-2 hours.</p>
+            </div>
+        </section>
+
+        <!-- Surgical Fixes -->
+        <section class="section surgical-section">
+            <h2>Surgical Fixes for Iter2</h2>
+            <p style="margin-bottom: 2rem; color: var(--gray);">Here's how to make Iter2 work for your 15-day April 11-25 schedule:</p>
+
+            <div class="surgery-card">
+                <div class="surgery-header">
+                    <h4>Fix Day 1 Exhaustion</h4>
+                    <span class="surgery-number">Surgery 1</span>
+                </div>
+                <div class="surgery-body">
+                    <div class="surgery-comparison">
+                        <div class="surgery-before">
+                            <strong>Original:</strong><br>
+                            Apr 11: Land Vienna → Drive 245km → Budapest
+                        </div>
+                        <div class="surgery-arrow">→</div>
+                        <div class="surgery-after">
+                            <strong>Fixed:</strong><br>
+                            Apr 11: Land Vienna → Rest, evening walk<br>
+                            Apr 12: Vienna → Budapest (fresh)
+                        </div>
+                    </div>
+                    <div class="surgery-note">
+                        <strong>Trade-off:</strong> You now need to cut 1 night elsewhere to compensate.
+                    </div>
+                </div>
+            </div>
+
+            <div class="surgery-card">
+                <div class="surgery-header">
+                    <h4>Cut 1 Night from Salzburg</h4>
+                    <span class="surgery-number">Surgery 2</span>
+                </div>
+                <div class="surgery-body">
+                    <div class="surgery-comparison">
+                        <div class="surgery-before">
+                            <strong>Original:</strong><br>
+                            Salzburg: 2 nights (Apr 17-18)
+                        </div>
+                        <div class="surgery-arrow">→</div>
+                        <div class="surgery-after">
+                            <strong>Fixed:</strong><br>
+                            Salzburg: 1 night only
+                        </div>
+                    </div>
+                    <div class="surgery-note">
+                        <strong>Why Salzburg?</strong> It's the most compact city - Mirabell Gardens + Fortress + Old Town fits in one full day. Innsbruck and Hallstatt need their 2 nights for the Alpine experience.
+                    </div>
+                </div>
+            </div>
+
+            <div class="surgery-card">
+                <div class="surgery-header">
+                    <h4>Add Buffer Day</h4>
+                    <span class="surgery-number">Surgery 3</span>
+                </div>
+                <div class="surgery-body">
+                    <div class="surgery-comparison">
+                        <div class="surgery-before">
+                            <strong>Original:</strong><br>
+                            Apr 24: Vienna full day<br>
+                            Apr 25: Fly home
+                        </div>
+                        <div class="surgery-arrow">→</div>
+                        <div class="surgery-after">
+                            <strong>Fixed:</strong><br>
+                            Apr 23: Arrive Vienna (flexible)<br>
+                            Apr 24: Buffer/flex day<br>
+                            Apr 25: Vienna + fly home
+                        </div>
+                    </div>
+                    <div class="surgery-note">
+                        <strong>Use buffer for:</strong> Catching up on missed spots, rest day, or extending a city you loved.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Surgically Fixed Itinerary -->
+            <div class="fixed-itinerary">
+                <div class="fixed-itinerary-header">
+                    <h3>Surgically Fixed Iter2 (15 days, 14 nights)</h3>
+                </div>
+                <div class="fixed-itinerary-body">
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Day</th>
+                                    <th>Date</th>
+                                    <th>Location</th>
+                                    <th>Notes</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Apr 11 (Sat)</td>
+                                    <td>Vienna</td>
+                                    <td>Arrive, rest, evening walk</td>
+                                    <td class="status-fixed">Fixed</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Apr 12 (Sun)</td>
+                                    <td>Vienna → Budapest</td>
+                                    <td>Drive 245km, evening Danube</td>
+                                    <td class="status-fixed">Fixed</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Apr 13 (Mon)</td>
+                                    <td>Budapest</td>
+                                    <td>Baths, Parliament, ruin bars</td>
+                                    <td class="status-unchanged">Unchanged</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Apr 14 (Tue)</td>
+                                    <td>Budapest</td>
+                                    <td>Market, cruise, more ruin bars</td>
+                                    <td class="status-unchanged">Unchanged</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Apr 15 (Wed)</td>
+                                    <td>Budapest → Prague</td>
+                                    <td>525km drive, Lednice stop</td>
+                                    <td class="status-unchanged">Unchanged</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>Apr 16 (Thu)</td>
+                                    <td>Prague</td>
+                                    <td>Castle, Charles Bridge, nightlife</td>
+                                    <td class="status-unchanged">Unchanged</td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>Apr 17 (Fri)</td>
+                                    <td>Prague</td>
+                                    <td>Petrin, Lennon Wall, beer gardens</td>
+                                    <td class="status-unchanged">Unchanged</td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td>Apr 18 (Sat)</td>
+                                    <td>Prague → Cesky Krumlov</td>
+                                    <td>170km, explore medieval town</td>
+                                    <td class="status-unchanged">Unchanged</td>
+                                </tr>
+                                <tr>
+                                    <td>9</td>
+                                    <td>Apr 19 (Sun)</td>
+                                    <td>Krumlov → Salzburg</td>
+                                    <td>200km via Mondsee</td>
+                                    <td class="status-unchanged">Unchanged</td>
+                                </tr>
+                                <tr>
+                                    <td>10</td>
+                                    <td>Apr 20 (Mon)</td>
+                                    <td>Salzburg → Innsbruck</td>
+                                    <td>Morning fortress, 160km alpine drive</td>
+                                    <td class="status-fixed">Fixed (was 2 nights)</td>
+                                </tr>
+                                <tr>
+                                    <td>11</td>
+                                    <td>Apr 21 (Tue)</td>
+                                    <td>Innsbruck</td>
+                                    <td>Nordkette cable car, old town</td>
+                                    <td class="status-unchanged">Unchanged</td>
+                                </tr>
+                                <tr>
+                                    <td>12</td>
+                                    <td>Apr 22 (Wed)</td>
+                                    <td>Innsbruck → Hallstatt</td>
+                                    <td>250km via Gosausee</td>
+                                    <td class="status-unchanged">Unchanged</td>
+                                </tr>
+                                <tr>
+                                    <td>13</td>
+                                    <td>Apr 23 (Thu)</td>
+                                    <td>Hallstatt</td>
+                                    <td>Village, Skywalk/Salt Mine</td>
+                                    <td class="status-unchanged">Unchanged</td>
+                                </tr>
+                                <tr>
+                                    <td>14</td>
+                                    <td>Apr 24 (Fri)</td>
+                                    <td>Hallstatt → Vienna</td>
+                                    <td>270km, buffer/flex evening</td>
+                                    <td class="status-fixed">Buffer added</td>
+                                </tr>
+                                <tr>
+                                    <td>15</td>
+                                    <td>Apr 25 (Sat)</td>
+                                    <td>Vienna</td>
+                                    <td>Morning explore, evening flight</td>
+                                    <td class="status-unchanged">Unchanged</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Remaining concerns -->
+            <div style="margin-top: 2rem; padding: 1.5rem; background: white; border: 1px solid var(--border);">
+                <h4 style="margin-bottom: 1rem;">Remaining Concerns After Surgery</h4>
+                <table style="width: 100%; font-size: 0.9rem;">
+                    <tr>
+                        <td style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);"><strong>Day 1 exhaustion</strong></td>
+                        <td style="padding: 0.5rem 0; border-bottom: 1px solid var(--border); color: var(--success);">Fixed (Vienna rest day)</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);"><strong>1 night short</strong></td>
+                        <td style="padding: 0.5rem 0; border-bottom: 1px solid var(--border); color: var(--success);">Fixed (Salzburg cut)</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);"><strong>No buffer</strong></td>
+                        <td style="padding: 0.5rem 0; border-bottom: 1px solid var(--border); color: var(--success);">Fixed (Day 14)</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.5rem 0; border-bottom: 1px solid var(--border);"><strong>Budapest → Prague long drive</strong></td>
+                        <td style="padding: 0.5rem 0; border-bottom: 1px solid var(--border); color: #dd6b20;">Still exists (unavoidable)</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.5rem 0;"><strong>Heavy driving</strong></td>
+                        <td style="padding: 0.5rem 0; color: #dd6b20;">Still 6-7 driving days</td>
+                    </tr>
+                </table>
             </div>
         </section>
 
