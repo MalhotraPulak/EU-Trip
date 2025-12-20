@@ -1,17 +1,17 @@
 # Itinerary Comparison Report
-## Current Itinerary vs. Iter2 (Grand Alpine & Imperial Loop)
+## Current Itinerary vs. Gemini (Grand Alpine & Imperial Loop)
 
 ---
 
 ## Executive Summary
 
-| Aspect | Current Itinerary | Iter2 (Alpine Loop) | Winner |
+| Aspect | Current Itinerary | Gemini (Alpine Loop) | Winner |
 |--------|-------------------|---------------------|--------|
 | **Starting City** | Prague | Vienna | Current (better nightlife start) |
 | **Travelers** | 5 people | 6 people | - |
 | **Duration** | 15 days (Apr 11-25) | 16 days | Similar |
 | **Total Distance** | ~1,400 km | ~2,070 km | Current (less driving) |
-| **Budget/Person** | ₹1,80,000 - ₹2,50,000 | ₹1,60,000 - ₹1,80,000 | Iter2 (cheaper) |
+| **Budget/Person** | ₹1,80,000 - ₹2,50,000 | ₹1,60,000 - ₹1,80,000 | Gemini (cheaper) |
 | **Countries** | 5 (CZ, DE, AT, SK, HU) | 4 (AT, HU, CZ, DE) | Current (more variety) |
 
 ---
@@ -20,26 +20,26 @@
 
 ### 1. COST COMPARISON
 
-| Category | Current Itinerary | Iter2 | Difference |
+| Category | Current Itinerary | Gemini | Difference |
 |----------|-------------------|-------|------------|
 | **Flights** | ₹45,000 - ₹65,000 | ₹55,000 | Similar |
-| **Car Rental** | ₹20,000 - ₹28,000 | ₹15,000 | Iter2 -₹5,000-13,000 |
+| **Car Rental** | ₹20,000 - ₹28,000 | ₹15,000 | Gemini -₹5,000-13,000 |
 | **Fuel/Tolls** | ~₹5,000 | ₹12,000 | Current -₹7,000 |
 | **Accommodation** | ₹25,000 - ₹40,000 | ₹45,000 | Current -₹5,000-20,000 |
 | **Food & Drink** | ₹25,000 - ₹40,000 | ₹35,000 | Similar |
 | **Activities** | ₹10,000 - ₹18,000 | ₹18,000 | Current -₹0-8,000 |
-| **TOTAL** | **₹1,80,000 - ₹2,50,000** | **₹1,80,000** | Iter2 slightly cheaper |
+| **TOTAL** | **₹1,80,000 - ₹2,50,000** | **₹1,80,000** | Gemini slightly cheaper |
 
 **Cost Analysis:**
-- **Iter2 Advantage:** Lower car rental per person (6 people split), explicit budget optimization with tips like carrying Indian ready-to-eat packets
+- **Gemini Advantage:** Lower car rental per person (6 people split), explicit budget optimization with tips like carrying Indian ready-to-eat packets
 - **Current Advantage:** More flexible budget tiers (Budget/Comfortable/Flexible), better breakdown of individual cost categories
-- **Key Difference:** Iter2 achieves ₹1.6L by cooking more meals and staying in cheaper border towns (Freilassing instead of Salzburg)
+- **Key Difference:** Gemini achieves ₹1.6L by cooking more meals and staying in cheaper border towns (Freilassing instead of Salzburg)
 
 ---
 
 ### 2. ACTIVITIES COMPARISON
 
-| Activity Type | Current Itinerary | Iter2 |
+| Activity Type | Current Itinerary | Gemini |
 |---------------|-------------------|-------|
 | **Walking Tours** | Old Town walks, Charles Bridge, Fisherman's Bastion | Danube Promenade, Old Town squares |
 | **Museums/Palaces** | Prague Castle, Schönbrunn, Belvedere | Schönbrunn, Lednice Chateau |
@@ -48,7 +48,7 @@
 
 **Activities Scoring:**
 
-| Current Itinerary | Score | Iter2 | Score |
+| Current Itinerary | Score | Gemini | Score |
 |-------------------|-------|-------|-------|
 | Prague Castle complex | 5/5 | Not included | 0/5 |
 | Bohemian Switzerland | 5/5 | Not included | 0/5 |
@@ -60,7 +60,7 @@
 | Kitzbühel stop | 0/5 | Included | 4/5 |
 | Gosausee Lake | 0/5 | Included | 4/5 |
 
-**Total Activities Score:** Current: 24/45 | Iter2: 21/45
+**Total Activities Score:** Current: 24/45 | Gemini: 21/45
 
 **Winner: Current Itinerary** - More unique experiences (Bohemian Switzerland, Dresden, Cross Club)
 
@@ -68,7 +68,7 @@
 
 ### 3. CHILL FACTOR
 
-| Aspect | Current Itinerary | Iter2 |
+| Aspect | Current Itinerary | Gemini |
 |--------|-------------------|-------|
 | **Rest Days** | 1-2 flexible days | 0 dedicated rest days |
 | **Driving Days** | 5-6 driving days | 8-9 driving days |
@@ -78,7 +78,7 @@
 
 **Chill Factor Rating:**
 - **Current Itinerary: 8/10** - Built-in recovery days, flexible options
-- **Iter2: 5/10** - Back-to-back driving days, packed schedule
+- **Gemini: 5/10** - Back-to-back driving days, packed schedule
 
 **Winner: Current Itinerary** - More breathing room and flexibility
 
@@ -86,7 +86,7 @@
 
 ### 4. SCENIC BEAUTY
 
-| Route Segment | Current Itinerary | Iter2 |
+| Route Segment | Current Itinerary | Gemini |
 |---------------|-------------------|-------|
 | **Alpine Roads** | Salzburg area only | Full Tyrolean experience (St. Johann, Kitzbühel) |
 | **Lake Views** | Hallstatt, Wolfgangsee | Mondsee, Gosausee, Hallstatt |
@@ -96,7 +96,7 @@
 
 **Scenic Routes Comparison:**
 
-| Route | Current | Iter2 |
+| Route | Current | Gemini |
 |-------|---------|-------|
 | Bohemian Switzerland | ★★★★★ | Not included |
 | Salzkammergut Lakes | ★★★★☆ | ★★★★★ |
@@ -107,15 +107,15 @@
 
 **Scenic Score:**
 - **Current Itinerary: 7/10** - Strong on forests/sandstone, weaker on Alps
-- **Iter2: 9/10** - Superior Alpine scenery, more mountain village exposure
+- **Gemini: 9/10** - Superior Alpine scenery, more mountain village exposure
 
-**Winner: Iter2** - Better Alpine and lake experiences
+**Winner: Gemini** - Better Alpine and lake experiences
 
 ---
 
 ### 5. NATURE & OUTDOORS
 
-| Nature Experience | Current Itinerary | Iter2 |
+| Nature Experience | Current Itinerary | Gemini |
 |-------------------|-------------------|-------|
 | **National Parks** | Bohemian Switzerland (full day) | None specifically |
 | **Hiking** | Pravčická Brána (2-3 hrs), Petřín Hill | Petřín Hill only mentioned |
@@ -126,7 +126,7 @@
 
 **Nature Score:**
 - **Current Itinerary: 9/10** - Dedicated nature activities, detailed planning
-- **Iter2: 6/10** - Scenic views from car, but fewer immersive nature experiences
+- **Gemini: 6/10** - Scenic views from car, but fewer immersive nature experiences
 
 **Winner: Current Itinerary** - Significantly better nature programming
 
@@ -134,7 +134,7 @@
 
 ### 6. HIKING OPPORTUNITIES
 
-| Hike | Current Itinerary | Iter2 |
+| Hike | Current Itinerary | Gemini |
 |------|-------------------|-------|
 | **Pravčická Brána** | Full guided day (2-3 hrs) | Not included |
 | **Petřín Hill** | Funicular + views | Mentioned (walk for view) |
@@ -145,7 +145,7 @@
 
 **Hiking Score:**
 - **Current Itinerary: 8/10** - Multiple hiking options with detailed instructions
-- **Iter2: 4/10** - Minimal hiking, mostly viewpoint visits
+- **Gemini: 4/10** - Minimal hiking, mostly viewpoint visits
 
 **Winner: Current Itinerary** - Much better for hikers
 
@@ -153,7 +153,7 @@
 
 ### 7. NIGHTLIFE & PARTY
 
-| City | Current Itinerary | Iter2 |
+| City | Current Itinerary | Gemini |
 |------|-------------------|-------|
 | **Prague** | 2 nights - Karlovy Lázně (5 floors!), Cross Club (techno), detailed beer culture | Not included (only transit) |
 | **Vienna** | 1 night - Pratersauna, Flex, Elektro Gönner | 1 evening - Opera/dinner focused |
@@ -162,7 +162,7 @@
 
 **Nightlife Venues Covered:**
 
-| Current Itinerary | Iter2 |
+| Current Itinerary | Gemini |
 |-------------------|-------|
 | Karlovy Lázně (5-floor megaclub) | Not mentioned |
 | Cross Club (industrial techno) | Not mentioned |
@@ -176,7 +176,7 @@
 
 **Nightlife Score:**
 - **Current Itinerary: 10/10** - Comprehensive party guide with venue recommendations, timing, costs
-- **Iter2: 4/10** - Minimal nightlife focus, ruin bars mentioned but not detailed
+- **Gemini: 4/10** - Minimal nightlife focus, ruin bars mentioned but not detailed
 
 **Winner: Current Itinerary** - Overwhelmingly better for nightlife
 
@@ -184,7 +184,7 @@
 
 ### 8. CITIES COVERED
 
-| City | Current Itinerary | Iter2 |
+| City | Current Itinerary | Gemini |
 |------|-------------------|-------|
 | **Prague** | 4-5 nights (home base) | 3 nights |
 | **Český Krumlov** | 1 night | 1 night |
@@ -197,18 +197,18 @@
 | **Hallstatt** | Day visit | Day visit |
 
 **Unique to Current:** Bratislava, Dresden, Bohemian Switzerland
-**Unique to Iter2:** Innsbruck, Tyrolean villages, more Austrian Alps
+**Unique to Gemini:** Innsbruck, Tyrolean villages, more Austrian Alps
 
 ---
 
 ## Summary Scoreboard
 
-| Category | Current Itinerary | Iter2 | Notes |
+| Category | Current Itinerary | Gemini | Notes |
 |----------|-------------------|-------|-------|
-| **Cost** | 7/10 | 8/10 | Iter2 slightly cheaper overall |
+| **Cost** | 7/10 | 8/10 | Gemini slightly cheaper overall |
 | **Activities** | 8/10 | 7/10 | Current has more unique experiences |
 | **Chill Factor** | 8/10 | 5/10 | Current has built-in rest days |
-| **Scenic Beauty** | 7/10 | 9/10 | Iter2 superior Alpine views |
+| **Scenic Beauty** | 7/10 | 9/10 | Gemini superior Alpine views |
 | **Nature/Outdoors** | 9/10 | 6/10 | Current has dedicated nature days |
 | **Hiking** | 8/10 | 4/10 | Current much better for hikers |
 | **Nightlife** | 10/10 | 4/10 | Current is party-optimized |
@@ -244,7 +244,7 @@
 2. Add Innsbruck (2 nights) by cutting Dresden day trip
 3. Include Gosausee stop on way to Hallstatt
 4. Keep Bohemian Switzerland (irreplaceable)
-5. Adopt Iter2's budget tips (stay in border towns, cook some meals)
+5. Adopt Gemini's budget tips (stay in border towns, cook some meals)
 
 **Modified Route:**
 ```
@@ -255,7 +255,7 @@ Prague (1 night) → Departure
 ```
 
 This gives you:
-- Alpine experience of Iter2
+- Alpine experience of Gemini
 - Nightlife of Current Itinerary
 - Nature days intact
 - Budget savings from border town stays
@@ -268,8 +268,8 @@ This gives you:
 **Current Itinerary wins 65-50** for a group of young travelers (25-27) seeking a balanced trip of nature, culture, AND nightlife.
 
 However, if your priorities lean heavily toward:
-- **Pure scenery/photography** → Go with Iter2
-- **Tighter budget** → Go with Iter2
+- **Pure scenery/photography** → Go with Gemini
+- **Tighter budget** → Go with Gemini
 - **Party + Nature balance** → Stick with Current
 
 ---
@@ -283,7 +283,7 @@ However, if your priorities lean heavily toward:
 Prague → Bohemian Switzerland → Český Krumlov → Salzburg → Vienna → Bratislava → Budapest → Prague
 ```
 
-**Iter2 (Vienna Start)**
+**Gemini (Vienna Start)**
 ```
 Vienna → Budapest → Prague → Český Krumlov → Salzburg → Innsbruck → Hallstatt → Vienna
 ```
