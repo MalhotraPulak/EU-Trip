@@ -9,7 +9,7 @@
 |--------|-------------------|---------------------|--------|
 | **Starting City** | Prague | Vienna | Current (better nightlife start) |
 | **Travelers** | 5 people | 6 people | - |
-| **Duration** | 14-15 days | 16 days | Iter2 (1 extra day) |
+| **Duration** | 15 days (Apr 11-25) | 16 days | Similar |
 | **Total Distance** | ~1,400 km | ~2,070 km | Current (less driving) |
 | **Budget/Person** | ₹1,80,000 - ₹2,50,000 | ₹1,60,000 - ₹1,80,000 | Iter2 (cheaper) |
 | **Countries** | 5 (CZ, DE, AT, SK, HU) | 4 (AT, HU, CZ, DE) | Current (more variety) |
